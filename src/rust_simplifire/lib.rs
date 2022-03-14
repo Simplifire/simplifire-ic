@@ -3,6 +3,13 @@ use ic_cdk::export::candid;
 
 static mut COUNTER: Option<candid::Nat> = None;
 
+// Greet function
+#[ic_cdk_macros::query]
+fn greet(name: String) -> String {
+    format!("Name returned from IC canister: {}!", name)
+}
+
+
 #[init]
 fn init() {
     unsafe {

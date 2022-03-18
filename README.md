@@ -14,6 +14,16 @@ To learn more before you start working with rust_simplifire, see the following d
 
 To start working on your project right away, clone the project from github and proceed as shown below.
 
+## Install the SDK
+
+The latest version of the DFinity Canister smart contract SDK package can be installed by running the following command in a terminal shell. This installation includes dfx, the DFinity execution command-line interface
+
+```bash
+# Installs the DFinity SDK
+sh -ci "$(curl -fsSL https://sdk.dfinity.org/install.sh)"
+```
+
+
 ## Running the project locally
 
 If you want to test the project locally, you can use the following commands:

@@ -1,67 +1,7 @@
-type User = record {
-  id: text;
-  first_name: text;
-  second_name : text; 
-  email: text;
-  password: text;
-  verified: bool;
-  company_name: Text;
-  documents: vec Document;
-  created_at: Timestamp;
-  updated_at: Timestamp;
-};
-
-type Document = record {
-  id: text;
-  name: String;
-  status: String;
-  document_versions: vec DocumentVersion;
-  created_at: Timestamp;
-  updated_at: Timestamp;
-  deleted_at: Timestamp;
-};
-
-type DocumentVersion = record {
-  id: text;
-  document_id: text;
-  content: text;
-  created_at: Timestamp;
-  updated_at: Timestamp;
-  deleted_at: Timestamp;
-};
 
 service : {
 
-  "create_user": (User) -> ();
-  "create_document": (User, Document) -> ();
-  "create_document_version": () -> ();
-  "update_user": () -> ();
-  "update_document": () -> ();
-  "update_document_version": () -> ();
-  "get_user_by_id": () -> () query;
-  "get_documents": () -> () query;
-  "get_document_versions": () -> () query;
-
  "greet": (text) -> (text) query;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   "increment": () -> ();
   "get": () -> (nat) query;

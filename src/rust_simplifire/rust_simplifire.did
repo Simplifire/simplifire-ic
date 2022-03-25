@@ -1,11 +1,35 @@
+type User = record {
+  id: text;
+  first_name: text;
+  second_name: text;
+  email: text;
+};
+
+type Document = record {
+  id: text;
+  name: text;
+  content: text;
+  created: text;
+};
+
+type Profile = record {
+    "name": text;
+    "description": text;
+    "keywords": vec text;
+};
 
 service : {
 
- "greet": (text) -> (text) query;
+    "getSelf": () -> (Profile) query;
+    "get": (text) -> (Profile);
+    "update": (Profile) -> ();
+    "search": (text) -> (opt Profile) query;
 
-  "increment": () -> ();
-  "get": () -> (nat) query;
-  "set": (nat) -> ();
+  "greet": (text) -> (text) query;
 
- 
+  add_user: (text) -> (text);
+  addDoc: (Document) -> ();
+  get_doc: (text) -> (Document);
+
+
 }

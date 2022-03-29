@@ -78,6 +78,15 @@ module.exports = {
   // tutorial, uncomment the following lines:
   module: {
     rules: [
+      { test: /\.css$/, use: ["style-loader", "css-loader"] },
+      { test: /\.scss$/, use: ["sass-loader"] },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      },
       { test: /\.vue$/, loader: "vue-loader" }
     ]
   },

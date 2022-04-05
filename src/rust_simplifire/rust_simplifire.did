@@ -6,7 +6,6 @@ type User = record {
 };
 
 type Document = record {
-  id: text;
   name: text;
   content: text;
   created: text;
@@ -27,9 +26,30 @@ service : {
 
   "greet": (text) -> (text) query;
 
-  add_user: (text) -> (text);
-  addDoc: (Document) -> ();
-  get_doc: (text) -> (Document);
+  addUser: (text) -> (text);
+  adddoc: (Document) -> ();
+  getDocSelf: () -> (Document) query;
+  getdoc: (text) -> (Document) query;
+
+  "increment": () -> ();
+  "getcount": () -> (nat) query;
+  "set": (nat) -> ();
+
+  whoami: () -> (text);
+
+  add_user: (User) -> ();
+  get_user: (text) -> (User) query;  // provide User id
+  add_doc: (Document) -> ();
+  get_doc: (text) -> (Document) query;  //[provide Document id]
+  get_docs: () -> (vec Document) query;  // return all Documents
+  // add_item: (Document) -> ();
+  //get_items: () -> (vec DocItem) query;
+
+  save_simple: (text) -> ();
+  get_simple: () -> (text);
+
+  
+
 
 
 }

@@ -1,55 +1,22 @@
-type User = record {
-  id: text;
-  first_name: text;
-  second_name: text;
-  email: text;
-};
+type TimestampMillis = nat64;
 
-type Document = record {
-  name: text;
-  content: text;
-  created: text;
-};
+type TodoItem =
+    record {
+        id: nat32;
+        added: TimestampMillis;
+        name: text;
+        done: bool;
+    };
 
-type Profile = record {
-    "name": text;
-    "description": text;
-    "keywords": vec text;
-};
-
-service : {
-
-    "getSelf": () -> (Profile) query;
-    "get": (text) -> (Profile);
-    "update": (Profile) -> ();
-    "search": (text) -> (opt Profile) query;
-
-  "greet": (text) -> (text) query;
-
-  addUser: (text) -> (text);
-  adddoc: (Document) -> ();
-  getDocSelf: () -> (Document) query;
-  getdoc: (text) -> (Document) query;
-
-  "increment": () -> ();
-  "getcount": () -> (nat) query;
-  "set": (nat) -> ();
-
-  whoami: () -> (text);
-
-  add_user: (User) -> ();
-  get_user: (text) -> (User) query;  // provide User id
-  add_doc: (Document) -> ();
-  get_doc: (text) -> (Document) query;  //[provide Document id]
-  get_docs: () -> (vec Document) query;  // return all Documents
-  // add_item: (Document) -> ();
-  //get_items: () -> (vec DocItem) query;
-
-  save_simple: (text) -> ();
-  get_simple: () -> (text);
-
-  
+service: {
+    add: (text) -> (nat32);
+    get: (opt bool) -> (vec TodoItem) query;
+    mark_done: (id: nat32) -> (bool);
 
 
+    save_simple: (text) -> ();
+    get_simple: (opt bool) -> (vec TodoItem) query;
 
 }
+
+

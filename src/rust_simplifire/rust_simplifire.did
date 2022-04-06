@@ -15,7 +15,7 @@ service: {
 
 
     save_simple: (text) -> ();
-    get_simple: () -> (text);
+    get_simple: (opt bool) -> (vec TodoItem) query;
 
 }
 

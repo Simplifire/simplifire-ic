@@ -46,6 +46,7 @@ struct Document {
     id: u32,
     added: TimestampMillis,
     name: String,
+    content: String,
     done: bool,
 }
 
@@ -117,11 +118,11 @@ fn mark_done_impl(id: u32, runtime_state: &mut RuntimeState) -> bool {
 // Simple scenario
 
 #[update]
-fn save_simple(name: String) -> u32 {
-    RUNTIME_STATE.with(|state| add_impl2(name, &mut state.borrow_mut()))
+fn add_doc(name: String, content: String) -> u32 {
+    RUNTIME_STATE.with(|state| add_impl2(name, content, &mut state.borrow_mut()))
 }
 
-fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_impl2(name: String, content: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
@@ -129,6 +130,7 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
         id,
         added: now,
         name,
+        content,
         done: false,
     });
 
@@ -136,7 +138,7 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
 }
 
 #[query]
-fn get_simple(done_filter: Option<bool>) -> Vec<Document> {
+fn get_docs(done_filter: Option<bool>) -> Vec<Document> {
     RUNTIME_STATE.with(|state| get_impl2(done_filter, &state.borrow()))
 }
 

@@ -29,7 +29,7 @@ impl Default for RuntimeState {
 
 #[derive(CandidType, Deserialize, Default)]
 struct Data {
-    simples: Vec<Simple>,
+    documents: Vec<Document>,
     items: Vec<TodoItem>,
 }
 
@@ -42,7 +42,7 @@ struct TodoItem {
 }
 
 #[derive(CandidType, Deserialize, Clone)]
-struct Simple {
+struct Document {
     id: u32,
     added: TimestampMillis,
     name: String,
@@ -125,7 +125,7 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
-    runtime_state.data.simples.push(Simple {
+    runtime_state.data.documents.push(Document {
         id,
         added: now,
         name,
@@ -136,10 +136,10 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
 }
 
 #[query]
-fn get_simple(done_filter: Option<bool>) -> Vec<Simple> {
+fn get_simple(done_filter: Option<bool>) -> Vec<Document> {
     RUNTIME_STATE.with(|state| get_impl2(done_filter, &state.borrow()))
 }
 
-fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Simple> {
-    runtime_state.data.simples.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
+fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
+    runtime_state.data.documents.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
 }

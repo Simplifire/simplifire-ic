@@ -29,7 +29,7 @@ impl Default for RuntimeState {
 
 #[derive(CandidType, Deserialize, Default)]
 struct Data {
-    simple: Simple,
+    simples: Vec<Simple>,
     items: Vec<TodoItem>,
 }
 
@@ -41,9 +41,12 @@ struct TodoItem {
     done: bool,
 }
 
-#[derive(CandidType, Deserialize, Default)]
+#[derive(CandidType, Deserialize, Clone)]
 struct Simple {
+    id: u32,
+    added: TimestampMillis,
     name: String,
+    done: bool,
 }
 
 #[init]
@@ -113,7 +116,6 @@ fn mark_done_impl(id: u32, runtime_state: &mut RuntimeState) -> bool {
 
 // Simple scenario
 
-
 #[update]
 fn save_simple(name: String) -> u32 {
     RUNTIME_STATE.with(|state| add_impl2(name, &mut state.borrow_mut()))
@@ -123,7 +125,7 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
-    runtime_state.data.items.push(TodoItem {
+    runtime_state.data.simples.push(Simple {
         id,
         added: now,
         name,
@@ -134,10 +136,10 @@ fn add_impl2(name: String, runtime_state: &mut RuntimeState) -> u32 {
 }
 
 #[query]
-fn get_simple(done_filter: Option<bool>) -> Vec<TodoItem> {
+fn get_simple(done_filter: Option<bool>) -> Vec<Simple> {
     RUNTIME_STATE.with(|state| get_impl2(done_filter, &state.borrow()))
 }
 
-fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<TodoItem> {
-    runtime_state.data.items.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
+fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Simple> {
+    runtime_state.data.simples.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
 }

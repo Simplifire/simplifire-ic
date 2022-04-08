@@ -18,6 +18,10 @@ service: {
     add_doc: (text, text) -> ();
     get_docs: (opt bool) -> (vec TodoItem) query;
 
+    "increment_counter": () -> ();
+    "get_counter": () -> (nat) query;
+    "set_counter": (nat) -> ();
+
 }
 
 

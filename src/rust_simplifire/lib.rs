@@ -8,6 +8,8 @@ use std::cell::RefCell;
 
 type TimestampMillis = u64;
 
+static mut COUNTER: Option<candid::Nat> = None;
+
 thread_local! {
     // If RuntimeState doesn't implement Default you can wrap it in an Option instead
     static RUNTIME_STATE: RefCell<RuntimeState> = RefCell::default();
@@ -57,6 +59,8 @@ fn init() {
     let runtime_state = RuntimeState { env, data };
 
     RUNTIME_STATE.with(|state| *state.borrow_mut() = runtime_state);
+
+    unsafe {COUNTER = Some(candid::Nat::from(0)); }
 }
 
 #[pre_upgrade]
@@ -144,4 +148,23 @@ fn get_docs(done_filter: Option<bool>) -> Vec<Document> {
 
 fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
     runtime_state.data.documents.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
+}
+
+#[update]
+fn increment_counter() -> () {
+    unsafe {
+        COUNTER.as_mut().unwrap().0 += 1u64;
+    }
+}
+
+#[query]
+fn get_counter() -> candid::Nat {
+    unsafe { COUNTER.as_mut().unwrap().clone() }
+}
+
+#[update]
+fn set_counter(input: candid::Nat) -> () {
+    unsafe {
+        COUNTER.as_mut().unwrap().0 = input.0;
+    }
 }

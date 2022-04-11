@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import VmdBadge from "@/components/VmdBadge.vue";
+import VmdBadge from "components/VmdBadge.vue";
 
 export default {
   name: "steps-card",

@@ -19,7 +19,7 @@
         <div class="col-12 col-sm-4">
           <div class="avatar avatar-xxl position-relative">
             <img
-              src="@/assets/img/team-2.jpg"
+              src="assets/img/team-2.jpg"
               class="border-radius-md"
               alt="team-2"
             />
@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import setTooltip from "@/assets/js/tooltip.js";
-import VmdInput from "@/components/VmdInput.vue";
+import setTooltip from "assets/js/tooltip.js";
+import VmdInput from "components/VmdInput.vue";
 
 export default {
   name: "about",

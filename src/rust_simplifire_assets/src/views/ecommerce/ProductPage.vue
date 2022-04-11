@@ -9,7 +9,7 @@
               <div class="col-xl-5 col-lg-6 text-center">
                 <img
                   class="w-100 border-radius-lg shadow-lg mx-auto"
-                  src="../../assets/img/products/product-details-1.jpg"
+                  src="assets/img/products/product-details-1.jpg"
                   alt="chair"
                 />
                 <div
@@ -23,13 +23,13 @@
                     itemtype="http://schema.org/ImageObject"
                   >
                     <a
-                      href="../../assets/img/products/product-details-2.jpg"
+                      href="assets/img/products/product-details-2.jpg"
                       itemprop="contentUrl"
                       data-size="500x600"
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="../../assets/img/products/product-details-2.jpg"
+                        src="assets/img/products/product-details-2.jpg"
                         alt="Image description"
                       />
                     </a>
@@ -41,13 +41,13 @@
                     itemtype="http://schema.org/ImageObject"
                   >
                     <a
-                      href="../../assets/img/products/product-details-3.jpg"
+                      href="assets/img/products/product-details-3.jpg"
                       itemprop="contentUrl"
                       data-size="500x600"
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="../../assets/img/products/product-details-3.jpg"
+                        src="assets/img/products/product-details-3.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />
@@ -60,13 +60,13 @@
                     itemtype="http://schema.org/ImageObject"
                   >
                     <a
-                      href="../../assets/img/products/product-details-4.jpg"
+                      href="assets/img/products/product-details-4.jpg"
                       itemprop="contentUrl"
                       data-size="500x600"
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="../../assets/img/products/product-details-4.jpg"
+                        src="assets/img/products/product-details-4.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />
@@ -79,13 +79,13 @@
                     itemtype="http://schema.org/ImageObject"
                   >
                     <a
-                      href="../../assets/img/products/product-details-5.jpg"
+                      href="assets/img/products/product-details-5.jpg"
                       itemprop="contentUrl"
                       data-size="500x600"
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="../../assets/img/products/product-details-5.jpg"
+                        src="assets/img/products/product-details-5.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />

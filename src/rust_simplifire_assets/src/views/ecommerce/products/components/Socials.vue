@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import VmdInput from "@/components/VmdInput.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import VmdInput from "components/VmdInput.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "socials",

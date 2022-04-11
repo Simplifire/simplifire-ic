@@ -907,7 +907,7 @@
 
 <script>
 import { DataTable } from "simple-datatables";
-import setTooltip from "@/assets/js/tooltip.js";
+import setTooltip from "assets/js/tooltip.js";
 
 export default {
   name: "products-list",

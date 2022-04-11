@@ -130,10 +130,10 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import VmdInput from "@/components/VmdInput.vue";
-import VmdSwitch from "@/components/VmdSwitch.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import Navbar from "examples/PageLayout/Navbar.vue";
+import VmdInput from "components/VmdInput.vue";
+import VmdSwitch from "components/VmdSwitch.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "signin-basic",

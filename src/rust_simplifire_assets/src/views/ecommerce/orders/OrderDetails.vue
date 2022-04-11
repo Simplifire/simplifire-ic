@@ -136,7 +136,7 @@
                 >
                   <img
                     class="w-10 me-3 mb-0"
-                    src="../../../assets/img/logos/mastercard.png"
+                    src="assets/img/logos/mastercard.png"
                     alt="logo"
                   />
                   <h6 class="mb-0">
@@ -215,10 +215,10 @@
 </template>
 
 <script>
-import VmdButton from "@/components/VmdButton.vue";
-import VmdAvatar from "@/components/VmdAvatar.vue";
-import VmdBadge from "@/components/VmdBadge.vue";
-import img1 from "../../../assets/img/product-12.jpg";
+import VmdButton from "components/VmdButton.vue";
+import VmdAvatar from "components/VmdAvatar.vue";
+import VmdBadge from "components/VmdBadge.vue";
+import img1 from "assets/img/product-12.jpg";
 
 export default {
   name: "order-details",

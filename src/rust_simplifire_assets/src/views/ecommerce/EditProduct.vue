@@ -25,7 +25,7 @@
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <a class="d-block blur-shadow-image">
               <img
-                src="../../assets/img/products/product-11.jpg"
+                src="assets/img/products/product-11.jpg"
                 alt="img-blur-shadow"
                 class="img-fluid shadow border-radius-lg"
               />
@@ -199,7 +199,7 @@
 /* eslint-disable prettier/prettier */
 import Quill from "quill";
 import Choices from "choices.js";
-import VmdInput from "@/components/VmdInput.vue";
+import VmdInput from "components/VmdInput.vue";
 
 export default {
   name: "edit-product",

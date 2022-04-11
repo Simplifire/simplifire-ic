@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import VmdAvatar from "@/components/VmdAvatar.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import VmdAvatar from "components/VmdAvatar.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "user-card",

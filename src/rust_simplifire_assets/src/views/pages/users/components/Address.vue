@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import VmdInput from "@/components/VmdInput.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import VmdInput from "components/VmdInput.vue";
+import VmdButton from "components/VmdButton.vue";
 import Choices from "choices.js";
 
 export default {

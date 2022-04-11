@@ -125,12 +125,12 @@
 </template>
 
 <script>
-import Card from "@/examples/Cards/Card.vue";
+import Card from "examples/Cards/Card.vue";
 import TrafficChart from "./components/TrafficChart.vue";
 import ReferralsCard from "./components/ReferralsCard.vue";
 import SocialCard from "./components/SocialCard.vue";
 import PagesCard from "./components/PagesCard.vue";
-import setTooltip from "@/assets/js/tooltip.js";
+import setTooltip from "assets/js/tooltip.js";
 
 export default {
   name: "analytics",

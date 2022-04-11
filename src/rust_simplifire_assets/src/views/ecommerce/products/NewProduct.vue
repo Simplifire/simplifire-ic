@@ -75,7 +75,7 @@ import Media from "./components/Media.vue";
 import Socials from "./components/Socials.vue";
 import Pricing from "./components/Pricing.vue";
 
-import setNavPills from "@/assets/js/nav-pills.js";
+import setNavPills from "assets/js/nav-pills.js";
 export default {
   name: "profile-overview",
   data() {

@@ -567,16 +567,16 @@
 
 <script>
 import * as Choices from "choices.js";
-import VmdButton from "@/components/VmdButton.vue";
-import VmdSwitch from "@/components/VmdSwitch.vue";
-import VmdBadge from "@/components/VmdBadge.vue";
-import VmdAvatar from "@/components/VmdAvatar.vue";
-import VmdInput from "@/components/VmdInput.vue";
-import img from "../../../../assets/img/bruce-mars.jpg";
-import img1 from "../../../../assets/img/small-logos/logo-slack.svg";
-import img2 from "../../../../assets/img/small-logos/logo-spotify.svg";
-import img3 from "../../../../assets/img/small-logos/logo-atlassian.svg";
-import img4 from "../../../../assets/img/small-logos/logo-asana.svg";
+import VmdButton from "components/VmdButton.vue";
+import VmdSwitch from "components/VmdSwitch.vue";
+import VmdBadge from "components/VmdBadge.vue";
+import VmdAvatar from "components/VmdAvatar.vue";
+import VmdInput from "components/VmdInput.vue";
+import img from "assets/img/bruce-mars.jpg";
+import img1 from "assets/img/small-logos/logo-slack.svg";
+import img2 from "assets/img/small-logos/logo-spotify.svg";
+import img3 from "assets/img/small-logos/logo-atlassian.svg";
+import img4 from "assets/img/small-logos/logo-asana.svg";
 
 export default {
   name: "side-nav-item",

@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import VmdButton from "@/components/VmdButton.vue";
-import VmdTextarea from "@/components/VmdTextarea.vue";
+import VmdButton from "components/VmdButton.vue";
+import VmdTextarea from "components/VmdTextarea.vue";
 
 export default {
   name: "profile",

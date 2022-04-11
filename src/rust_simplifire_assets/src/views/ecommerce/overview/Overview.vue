@@ -73,12 +73,12 @@ import SalesChartCard from "./components/SalesChartCard.vue";
 import ProductsCard from "./components/ProductsCard.vue";
 import OverviewCard from "./components/OverviewCard.vue";
 // images
-import US from "@/assets/img/icons/flags/US.png";
-import DE from "@/assets/img/icons/flags/DE.png";
-import GB from "@/assets/img/icons/flags/GB.png";
-import BR from "@/assets/img/icons/flags/BR.png";
-import AU from "@/assets/img/icons/flags/AU.png";
-import setTooltip from "@/assets/js/tooltip.js";
+import US from "assets/img/icons/flags/US.png";
+import DE from "assets/img/icons/flags/DE.png";
+import GB from "assets/img/icons/flags/GB.png";
+import BR from "assets/img/icons/flags/BR.png";
+import AU from "assets/img/icons/flags/AU.png";
+import setTooltip from "assets/js/tooltip.js";
 
 export default {
   name: "Overview",

@@ -64,7 +64,7 @@
 
 <script>
 import Choices from "choices.js";
-import VmdInput from "@/components/VmdInput.vue";
+import VmdInput from "components/VmdInput.vue";
 
 export default {
   name: "address",

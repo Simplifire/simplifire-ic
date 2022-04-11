@@ -165,7 +165,7 @@
 </template>
 
 <script>
-import VmdButton from "@/components/VmdButton.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "transaction-card",

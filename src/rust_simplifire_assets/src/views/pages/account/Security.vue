@@ -194,9 +194,9 @@
 <script>
 import * as Choices from "choices.js";
 import NavPill from "./components/NavPill.vue";
-import VmdInput from "@/components/VmdInput.vue";
-import VmdSwitch from "@/components/VmdSwitch.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import VmdInput from "components/VmdInput.vue";
+import VmdSwitch from "components/VmdSwitch.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "security",

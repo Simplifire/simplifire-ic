@@ -184,8 +184,8 @@
 </template>
 
 <script>
-import VmdAlert from "@/components/VmdAlert.vue";
-import VmdSnackbar from "@/components/VmdSnackbar.vue";
+import VmdAlert from "components/VmdAlert.vue";
+import VmdSnackbar from "components/VmdSnackbar.vue";
 
 export default {
   name: "Notifications",

@@ -4,7 +4,7 @@
       class="overflow-hidden position-relative border-radius-xl"
       :style="{
         backgroundImage:
-          'url(' + require('@/assets/img/illustrations/pattern-tree.svg') + ')',
+          'url(' + require('assets/img/illustrations/pattern-tree.svg') + ')',
       }"
     >
       <span class="mask bg-gradient-dark opacity-10"></span>
@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import VmdAvatar from "@/components/VmdAvatar.vue";
-import img from "../../assets/img/illustrations/pattern-tree.svg";
-import img1 from "../../assets/img/logos/mastercard.png";
+import VmdAvatar from "components/VmdAvatar.vue";
+import img from "assets/img/illustrations/pattern-tree.svg";
+import img1 from "assets/img/logos/mastercard.png";
 
 export default {
   name: "master-card",

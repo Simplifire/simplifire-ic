@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import VmdCheckbox from "@/components/VmdCheckbox.vue";
+import VmdCheckbox from "components/VmdCheckbox.vue";
 
 export default {
   name: "todo-item",

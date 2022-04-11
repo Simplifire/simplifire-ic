@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import setMaterialInput from "@/assets/js/material-input.js";
+import setMaterialInput from "assets/js/material-input.js";
 
 export default {
   name: "vmd-input",

@@ -579,15 +579,15 @@
 
 <script>
 import { DataTable } from "simple-datatables";
-import VmdButton from "@/components/VmdButton.vue";
-import VmdAvatar from "@/components/VmdAvatar.vue";
-import VmdCheckbox from "@/components/VmdCheckbox.vue";
-import img1 from "../../../assets/img/team-2.jpg";
-import img2 from "../../../assets/img/team-1.jpg";
-import img3 from "../../../assets/img/team-3.jpg";
-import img4 from "../../../assets/img/team-4.jpg";
-import img5 from "../../../assets/img/team-5.jpg";
-import img6 from "../../../assets/img/ivana-squares.jpg";
+import VmdButton from "components/VmdButton.vue";
+import VmdAvatar from "components/VmdAvatar.vue";
+import VmdCheckbox from "components/VmdCheckbox.vue";
+import img1 from "assets/img/team-2.jpg";
+import img2 from "assets/img/team-1.jpg";
+import img3 from "assets/img/team-3.jpg";
+import img4 from "assets/img/team-4.jpg";
+import img5 from "assets/img/team-5.jpg";
+import img6 from "assets/img/ivana-squares.jpg";
 
 export default {
   name: "order-list",

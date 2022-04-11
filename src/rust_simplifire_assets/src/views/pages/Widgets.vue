@@ -90,17 +90,16 @@
 </template>
 
 <script>
-import Card from "@/examples/Cards/Card.vue";
+import Card from "examples/Cards/Card.vue";
 import TasksCard from "./projects/components/TasksCard.vue";
-import DefaultInfoCard from "@/examples/Cards/DefaultInfoCard.vue";
-import MasterCard from "@/examples/Cards/MasterCard.vue";
+import DefaultInfoCard from "examples/Cards/DefaultInfoCard.vue";
+import MasterCard from "examples/Cards/MasterCard.vue";
 import CaloriesChart from "./components/CaloriesChart.vue";
 import EventsCard from "./components/EventsCard.vue";
 import FullBodyCard from "./components/FullBodyCard.vue";
 import ControllerCard from "./components/ControllerCard.vue";
 import MiniInfoCard from "./components/MiniInfoCard.vue";
 import StepsCard from "./components/StepsCard.vue";
-import Calendar from "@/examples/Calendar.vue";
 import CategoriesCard from "../dashboards/components/CategoriesCard.vue";
 import MusicPlayer from "./components/MusicPlayer.vue";
 import OrdersCard from "./components/OrdersCard.vue";

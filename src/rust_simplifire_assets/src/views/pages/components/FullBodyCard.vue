@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import VmdBadge from "@/components/VmdBadge.vue";
+import VmdBadge from "components/VmdBadge.vue";
 
 export default {
   name: "full-body-card",

@@ -67,8 +67,8 @@
 <script>
 import Quill from "quill";
 import Choices from "choices.js";
-import VmdButton from "@/components/VmdButton.vue";
-import VmdInput from "@/components/VmdInput.vue";
+import VmdButton from "components/VmdButton.vue";
+import VmdInput from "components/VmdInput.vue";
 
 export default {
   name: "product-info",

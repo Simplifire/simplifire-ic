@@ -170,7 +170,7 @@
   </div>
 </template>
 <script>
-import "@/assets/js/world.js";
+import "assets/js/world.js";
 
 import ChartBars from "./components/ChartBars.vue";
 import ChartLine from "./components/ChartLine.vue";
@@ -178,13 +178,13 @@ import ChartLineTasks from "./components/ChartLineTasks.vue";
 import MiniCards from "./components/MiniCards.vue";
 import BookingCard from "./components/BookingCard.vue";
 
-import US from "../../assets/img/icons/flags/US.png";
-import DE from "../../assets/img/icons/flags/DE.png";
-import GB from "../../assets/img/icons/flags/GB.png";
-import BR from "../../assets/img/icons/flags/BR.png";
-import booking1 from "../../assets/img/products/product-1-min.jpg";
-import booking2 from "../../assets/img/products/product-2-min.jpg";
-import booking3 from "../../assets/img/products/product-3-min.jpg";
+import US from "assets/img/icons/flags/US.png";
+import DE from "assets/img/icons/flags/DE.png";
+import GB from "assets/img/icons/flags/GB.png";
+import BR from "assets/img/icons/flags/BR.png";
+import booking1 from "assets/img/products/product-1-min.jpg";
+import booking2 from "assets/img/products/product-2-min.jpg";
+import booking3 from "assets/img/products/product-3-min.jpg";
 
 export default {
   name: "dashboard-default",

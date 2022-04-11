@@ -21,7 +21,7 @@
           >
             <img
               class="w-10 me-3 mb-0"
-              src="../../../../assets/img/logos/mastercard.png"
+              src="assets/img/logos/mastercard.png"
               alt="logo"
             />
             <h6 class="mb-0">
@@ -45,7 +45,7 @@
           >
             <img
               class="w-10 me-3 mb-0"
-              src="../../../../assets/img/logos/visa.png"
+              src="assets/img/logos/visa.png"
               alt="logo"
             />
             <h6 class="mb-0">
@@ -69,9 +69,9 @@
 </template>
 
 <script>
-import VmdButton from "@/components/VmdButton.vue";
-import img1 from "../../../../assets/img/logos/mastercard.png";
-import img2 from "../../../../assets/img/logos/visa.png";
+import VmdButton from "components/VmdButton.vue";
+import img1 from "assets/img/logos/mastercard.png";
+import img2 from "assets/img/logos/visa.png";
 
 export default {
   name: "payment-card",

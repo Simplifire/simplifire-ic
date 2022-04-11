@@ -13,7 +13,7 @@
         <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
             <img
-              src="../../../assets/img/bruce-mars.jpg"
+              src="assets/img/bruce-mars.jpg"
               alt="profile_image"
               class="shadow-sm w-100 border-radius-lg"
             />
@@ -188,20 +188,20 @@
 </template>
 
 <script>
-import team1 from "../../../assets/img/team-1.jpg";
-import team2 from "../../../assets/img/team-2.jpg";
-import team3 from "../../../assets/img/team-3.jpg";
-import team4 from "../../../assets/img/team-4.jpg";
-import team5 from "../../../assets/img/team-5.jpg";
-import slackLogo from "../../../assets/img/small-logos/logo-slack.svg";
-import invisionLogo from "../../../assets/img/small-logos/logo-invision.svg";
-import spotifyLogo from "../../../assets/img/small-logos/logo-spotify.svg";
-import xdLogo from "../../../assets/img/small-logos/logo-xd.svg";
-import asanaLogo from "../../../assets/img/small-logos/logo-asana.svg";
-import atlassianLogo from "../../../assets/img/small-logos/logo-atlassian.svg";
+import team1 from "assets/img/team-1.jpg";
+import team2 from "assets/img/team-2.jpg";
+import team3 from "assets/img/team-3.jpg";
+import team4 from "assets/img/team-4.jpg";
+import team5 from "assets/img/team-5.jpg";
+import slackLogo from "assets/img/small-logos/logo-slack.svg";
+import invisionLogo from "assets/img/small-logos/logo-invision.svg";
+import spotifyLogo from "assets/img/small-logos/logo-spotify.svg";
+import xdLogo from "assets/img/small-logos/logo-xd.svg";
+import asanaLogo from "assets/img/small-logos/logo-asana.svg";
+import atlassianLogo from "assets/img/small-logos/logo-atlassian.svg";
 
 import ProjectsCard from "./components/ProjectsCard.vue";
-import setNavPills from "@/assets/js/nav-pills.js";
+import setNavPills from "assets/js/nav-pills.js";
 
 export default {
   name: "profile-team",

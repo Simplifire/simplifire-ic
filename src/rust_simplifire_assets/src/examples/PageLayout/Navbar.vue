@@ -373,7 +373,7 @@
 
                         <span>Sign In</span>
                         <img
-                          src="@/assets/img/down-arrow.svg"
+                          src="assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />
@@ -415,7 +415,7 @@
 
                         <span>Sign Up</span>
                         <img
-                          src="@/assets/img/down-arrow.svg"
+                          src="assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />
@@ -445,7 +445,7 @@
 
                         <span>Reset Password</span>
                         <img
-                          src="@/assets/img/down-arrow.svg"
+                          src="assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />
@@ -592,21 +592,6 @@
                       </div>
                     </router-link>
                   </li>
-                  <li
-                    class="p-0 border-0 nav-item dropdown dropdown-hover dropdown-subitem list-group-item"
-                  >
-                    <router-link
-                      class="py-2 dropdown-item ps-3 border-radius-md"
-                      :to="{ name: 'Calendar' }"
-                    >
-                      <div class="d-flex align-items-center text-dark">
-                        <i class="material-icons opacity-6 me-2 text-md"
-                          >event</i
-                        >
-                        Calendar
-                      </div>
-                    </router-link>
-                  </li>
                 </ul>
               </div>
               <!-- responsive -->
@@ -643,15 +628,6 @@
                         >backup_table</i
                       >
                       DataTables
-                    </div>
-                  </router-link>
-                  <router-link
-                    class="py-2 ps-3 border-radius-md"
-                    :to="{ name: 'Calendar' }"
-                  >
-                    <div class="d-flex align-items-center text-dark">
-                      <i class="material-icons opacity-6 me-2 text-md">event</i>
-                      Calendar
                     </div>
                   </router-link>
                 </div>
@@ -1050,8 +1026,8 @@
 </template>
 
 <script>
-import downArrWhite from "@/assets/img/down-arrow-white.svg";
-import downArrBlack from "@/assets/img/down-arrow-dark.svg";
+import downArrWhite from "assets/img/down-arrow-white.svg";
+import downArrBlack from "assets/img/down-arrow-dark.svg";
 
 export default {
   name: "navbar",

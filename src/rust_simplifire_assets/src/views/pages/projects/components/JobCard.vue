@@ -5,7 +5,7 @@
         <div class="col-8 d-flex">
           <div>
             <img
-              src="../../../../assets/img/team-3.jpg"
+              src="assets/img/team-3.jpg"
               class="avatar avatar-sm me-2"
               alt="avatar image"
             />

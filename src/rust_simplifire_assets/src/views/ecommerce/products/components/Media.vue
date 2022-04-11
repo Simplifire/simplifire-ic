@@ -40,7 +40,7 @@
 
 <script>
 import Dropzone from "dropzone";
-import VmdButton from "@/components/VmdButton.vue";
+import VmdButton from "components/VmdButton.vue";
 
 export default {
   name: "media",

@@ -17,7 +17,7 @@
               >
                 <img
                   alt="Image placeholder"
-                  src="../../assets/img/team-1.jpg"
+                  src="assets/img/team-1.jpg"
                 />
               </a>
               <a
@@ -28,7 +28,7 @@
               >
                 <img
                   alt="Image placeholder"
-                  src="../../assets/img/team-2.jpg"
+                  src="assets/img/team-2.jpg"
                   class="rounded-circle"
                 />
               </a>
@@ -40,7 +40,7 @@
               >
                 <img
                   alt="Image placeholder"
-                  src="../../assets/img/team-3.jpg"
+                  src="assets/img/team-3.jpg"
                   class="rounded-circle"
                 />
               </a>
@@ -52,7 +52,7 @@
               >
                 <img
                   alt="Image placeholder"
-                  src="../../assets/img/team-4.jpg"
+                  src="assets/img/team-4.jpg"
                   class="rounded-circle"
                 />
               </a>
@@ -64,7 +64,7 @@
               >
                 <img
                   alt="Image placeholder"
-                  src="../../assets/img/team-5.jpg"
+                  src="assets/img/team-5.jpg"
                   class="rounded-circle"
                 />
               </a>

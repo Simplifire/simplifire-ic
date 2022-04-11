@@ -24,7 +24,7 @@
                   :style="{
                     backgroundImage:
                       'url(' +
-                      require('@/assets/img/illustrations/illustration-signin.jpg') +
+                      require('assets/img/illustrations/illustration-signin.jpg') +
                       ')',
                   }"
                 ></div>
@@ -90,10 +90,10 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import VmdInput from "@/components/VmdInput.vue";
-import VmdSwitch from "@/components/VmdSwitch.vue";
-import VmdButton from "@/components/VmdButton.vue";
+import Navbar from "examples/PageLayout/Navbar.vue";
+import VmdInput from "components/VmdInput.vue";
+import VmdSwitch from "components/VmdSwitch.vue";
+import VmdButton from "components/VmdButton.vue";
 const body = document.getElementsByTagName("body")[0];
 
 export default {

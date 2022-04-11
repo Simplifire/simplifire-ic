@@ -14,13 +14,12 @@ import Notifications from "../views/pages/Notifications.vue";
 import Kanban from "../views/applications/Kanban.vue";
 import Wizard from "../views/applications/wizard/Wizard.vue";
 import DataTables from "../views/applications/DataTables.vue";
-import Calendar from "../views/applications/Calendar.vue";
 import NewProduct from "../views/ecommerce/products/NewProduct.vue";
 import EditProduct from "../views/ecommerce/EditProduct.vue";
 import ProductPage from "../views/ecommerce/ProductPage.vue";
 import ProductsList from "../views/ecommerce/ProductsList.vue";
-import OrderDetails from "../views/ecommerce/orders/OrderDetails";
-import OrderList from "../views/ecommerce/orders/OrderList";
+import OrderDetails from "../views/ecommerce/orders/OrderDetails.vue";
+import OrderList from "../views/ecommerce/orders/OrderList.vue";
 import NewUser from "../views/pages/users/NewUser.vue";
 import Settings from "../views/pages/account/Settings.vue";
 import Billing from "../views/pages/account/Billing.vue";
@@ -118,11 +117,6 @@ const routes = [
     path: "/applications/data-tables",
     name: "Data Tables",
     component: DataTables,
-  },
-  {
-    path: "/applications/calendar",
-    name: "Calendar",
-    component: Calendar,
   },
   {
     path: "/ecommerce/products/new-product",

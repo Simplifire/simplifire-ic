@@ -9,7 +9,7 @@
       </div>
       <img
         class="img-fluid pt-3 pb-2"
-        src="../../../assets/img/small-logos/icon-bulb.svg"
+        src="assets/img/small-logos/icon-bulb.svg"
         alt="bulb_icon"
       />
       <p class="mb-0">{{ text }}</p>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import VmdSwitch from "@/components/VmdSwitch.vue";
+import VmdSwitch from "components/VmdSwitch.vue";
 
 export default {
   name: "controller-card",

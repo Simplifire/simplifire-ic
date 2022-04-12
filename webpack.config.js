@@ -74,7 +74,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.css$/, use: ["vue-style-loader", "css-loader"] },
-            { test: /\.scss$/, use: ["sass-loader"] },
+            { test: /\.scss$/, use: ['style-loader','css-loader','sass-loader',] },
             {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: "file-loader",

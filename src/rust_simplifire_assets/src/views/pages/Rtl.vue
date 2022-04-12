@@ -94,9 +94,6 @@
       </div>
     </div>
     <div class="mt-4 row">
-      <div class="col-lg-5">
-        <calendar title="تقویم" />
-      </div>
       <div class="mt-0 col-lg-3">
         <categories-card
           cardTitle="فئات"
@@ -164,7 +161,6 @@ export default {
     ControllerCard,
     MiniInfoCard,
     StepsCard,
-    Calendar,
     CategoriesCard,
     OrdersCard,
     MusicPlayer,

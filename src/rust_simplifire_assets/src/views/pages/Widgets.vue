@@ -75,9 +75,6 @@
       </div>
     </div>
     <div class="row mt-4">
-      <div class="col-lg-5">
-        <calendar />
-      </div>
       <div class="col-lg-3 mt-0">
         <categories-card />
         <music-player />
@@ -117,7 +114,6 @@ export default {
     ControllerCard,
     MiniInfoCard,
     StepsCard,
-    Calendar,
     CategoriesCard,
     OrdersCard,
     MusicPlayer,

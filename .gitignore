@@ -19,3 +19,7 @@ dist/
 
 # other
 .env
+
+# generated
+src/declarations/rust_simplifire/*.did.d.ts
+src/declarations/rust_simplifire/*.did.js

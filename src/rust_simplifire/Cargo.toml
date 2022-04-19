@@ -9,7 +9,11 @@ edition = "2018"
 path = "lib.rs"
 crate-type = ["cdylib"]
 
+
 [dependencies]
-candid = "0.7.4"
-ic-cdk = "0.4"
-ic-cdk-macros = "0.4"
+candid = "0.7.8"
+getrandom = { version = "0.2.3", features = ["js"] }
+ic-cdk = "0.3.2"
+ic-cdk-macros = "0.3.2"
+rand = "0.7.3"
+serde = "1.0.130"

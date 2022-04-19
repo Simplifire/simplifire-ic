@@ -1,0 +1,24 @@
+type User = record {
+  id: text;
+  first_name: text;
+  second_name: text;
+  email: text;
+}
+
+type Document = record {
+  id: text;
+  name: text;
+  content: text;
+  date_created: text;
+}
+
+service : {
+  add_user: (User) -> ();
+  get_user: (text) -> (User) query;  // provide User id
+  add_doc: (Document) -> ();
+  get_doc: (text) -> (Document) query;  //[provide Document id]
+  get_docs: () -> (vec Document) query;  // return all Documents
+
+  // Used to 'ping' a string to IC and return it in a line of text.
+  "greet": (text) -> (text) query;
+}

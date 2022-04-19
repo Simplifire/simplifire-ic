@@ -1,11 +1,27 @@
+type TimestampMillis = nat64;
 
-service : {
+type TodoItem =
+    record {
+        id: nat32;
+        added: TimestampMillis;
+        name: text;
+        content: text;
+        done: bool;
+    };
 
- "greet": (text) -> (text) query;
+service: {
+    add: (text) -> (nat32);
+    get: (opt bool) -> (vec TodoItem) query;
+    mark_done: (id: nat32) -> (bool);
 
-  "increment": () -> ();
-  "get": () -> (nat) query;
-  "set": (nat) -> ();
 
- 
+    add_doc: (text, text) -> ();
+    get_docs: (opt bool) -> (vec TodoItem) query;
+
+    "increment_counter": () -> ();
+    "get_counter": () -> (nat) query;
+    "set_counter": (nat) -> ();
+
 }
+
+

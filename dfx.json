@@ -13,7 +13,6 @@
         "entrypoint": "src/rust_simplifire_assets/src/index.html"
       },
       "source": [
-        "src/rust_simplifire_assets/assets",
         "dist/rust_simplifire_assets/"
       ],
       "type": "assets"

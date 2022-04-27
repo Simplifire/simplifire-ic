@@ -6,7 +6,25 @@ use ic_cdk_macros::*;
 use serde::Deserialize;
 use std::cell::RefCell;
 
+use ic_cdk::api::{caller as caller_api};
+use ic_cdk::export::{candid, Principal};
+
 type TimestampMillis = u64;
+
+/// Unlike Motoko, the caller identity is not built into Rust. 
+/// Thus, we use the ic_cdk::api::caller() method inside this wrapper function.
+/// The wrapper prevents the use of the anonymous identity. Forbidding anonymous 
+/// interactions is the recommended default behavior for IC canisters. 
+fn caller() -> Principal {
+    let caller = caller_api();
+    // The anonymous principal is not allowed to interact with the 
+    // encrypted notes canister.
+    if caller == Principal::anonymous() {
+        panic!("Anonymous principal not allowed to make calls.")
+    }
+    caller
+}
+
 
 static mut COUNTER: Option<candid::Nat> = None;
 
@@ -150,21 +168,9 @@ fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Doc
     runtime_state.data.documents.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
 }
 
-#[update]
-fn increment_counter() -> () {
-    unsafe {
-        COUNTER.as_mut().unwrap().0 += 1u64;
-    }
-}
-
-#[query]
-fn get_counter() -> candid::Nat {
-    unsafe { COUNTER.as_mut().unwrap().clone() }
-}
-
-#[update]
-fn set_counter(input: candid::Nat) -> () {
-    unsafe {
-        COUNTER.as_mut().unwrap().0 = input.0;
-    }
+/// Reflects the [caller]'s identity by returning (a future of) its principal. 
+/// Useful for debugging.
+#[update(name = "whoami")]
+fn whoami() -> String {
+    caller_api().to_string()
 }

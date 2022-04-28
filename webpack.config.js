@@ -100,14 +100,14 @@ module.exports = {
             chunks: ["index"],
             cache: false,
         }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.join(__dirname, "src", frontendDirectory, "assets"),
-                    to: path.join(__dirname, "dist", frontendDirectory),
-                },
-            ],
-        }),
+        // new CopyPlugin({
+        //     patterns: [
+        //         {
+        //             from: path.join(__dirname, "src", frontendDirectory, "assets"),
+        //             to: path.join(__dirname, "dist", frontendDirectory),
+        //         },
+        //     ],
+        // }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: "development",
             ...canisterEnvVariables,
@@ -130,6 +130,7 @@ module.exports = {
         },
         hot: true,
         watchFiles: [path.resolve(__dirname, "src", frontendDirectory)],
+        historyApiFallback: true,
         liveReload: true,
     },
 };

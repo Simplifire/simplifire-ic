@@ -32,15 +32,8 @@ impl Default for RuntimeState {
 #[derive(CandidType, Deserialize, Default)]
 struct Data {
     documents: Vec<Document>,
-    items: Vec<TodoItem>,
-}
-
-#[derive(CandidType, Deserialize, Clone)]
-struct TodoItem {
-    id: u32,
-    added: TimestampMillis,
-    name: String,
-    done: bool,
+    users: Vec<User>,
+    userdocuments: Vec<UserDocument>,
 }
 
 #[derive(CandidType, Deserialize, Clone)]
@@ -49,8 +42,30 @@ struct Document {
     added: TimestampMillis,
     name: String,
     content: String,
-    done: bool,
+    active: bool,
 }
+
+#[derive(CandidType, Deserialize, Clone)]
+struct User {
+    id: u32,
+    first_name: String,
+    last_name: String,
+    email: String,
+    added: TimestampMillis,
+    active: bool,
+} 
+
+#[derive(CandidType, Deserialize, Clone)]
+struct UserDocument {
+        id: u32,
+        document_id: u32,
+        user_id: u32,
+        role: String,
+        can_edit: bool,
+        signed: bool,
+        added: TimestampMillis,
+        active: bool,
+    }
 
 #[init]
 fn init() {
@@ -77,49 +92,7 @@ fn post_upgrade() {
     RUNTIME_STATE.with(|state| *state.borrow_mut() = runtime_state);
 }
 
-#[update]
-fn add(name: String) -> u32 {
-    RUNTIME_STATE.with(|state| add_impl(name, &mut state.borrow_mut()))
-}
-
-fn add_impl(name: String, runtime_state: &mut RuntimeState) -> u32 {
-    let id = runtime_state.env.random_u32();
-    let now = runtime_state.env.now();
-
-    runtime_state.data.items.push(TodoItem {
-        id,
-        added: now,
-        name,
-        done: false,
-    });
-
-    id
-}
-
-#[query]
-fn get(done_filter: Option<bool>) -> Vec<TodoItem> {
-    RUNTIME_STATE.with(|state| get_impl(done_filter, &state.borrow()))
-}
-
-fn get_impl(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<TodoItem> {
-    runtime_state.data.items.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
-}
-
-#[update]
-fn mark_done(id: u32) -> bool {
-    RUNTIME_STATE.with(|state| mark_done_impl(id, &mut state.borrow_mut()))
-}
-
-fn mark_done_impl(id: u32, runtime_state: &mut RuntimeState) -> bool {
-    if let Some(item) = runtime_state.data.items.iter_mut().find(|i| i.id == id) {
-        item.done = true;
-        true
-    } else {
-        false
-    }
-}
-
-// Simple scenario
+// DOCUMENT
 
 #[update]
 fn add_doc(name: String, content: String) -> u32 {
@@ -135,36 +108,101 @@ fn add_impl2(name: String, content: String, runtime_state: &mut RuntimeState) ->
         added: now,
         name,
         content,
-        done: false,
+        active: true,
     });
 
     id
 }
 
 #[query]
-fn get_docs(done_filter: Option<bool>) -> Vec<Document> {
-    RUNTIME_STATE.with(|state| get_impl2(done_filter, &state.borrow()))
+fn get_docs(active_filter: Option<bool>) -> Vec<Document> {
+    RUNTIME_STATE.with(|state| get_impl2(active_filter, &state.borrow()))
 }
 
-fn get_impl2(done_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
-    runtime_state.data.documents.iter().filter(|i| done_filter.map_or(true, |d| i.done == d)).cloned().collect()
+fn get_impl2(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
+    runtime_state.data.documents.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 
 #[update]
-fn increment_counter() -> () {
-    unsafe {
-        COUNTER.as_mut().unwrap().0 += 1u64;
+fn update_doc(id: u32, content: String) -> bool {
+    RUNTIME_STATE.with(|state| update_doc_impl(id, content, &mut state.borrow_mut()))
+}
+
+fn update_doc_impl(id: u32, content: String, runtime_state: &mut RuntimeState) -> bool {
+    if let Some(document) = runtime_state.data.documents.iter_mut().find(|i| i.id == id) {
+        document.active = true;
+        document.content = content;
+        true
+    } else {
+        false
     }
+}
+
+// USER
+
+#[update]
+fn add_user(first_name: String, last_name: String, email: String) -> u32 {
+    RUNTIME_STATE.with(|state| add_impl3(first_name, last_name, email, &mut state.borrow_mut()))
+}
+
+fn add_impl3(first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
+    let id = runtime_state.env.random_u32();
+    let now = runtime_state.env.now();
+
+    runtime_state.data.users.push(User {
+        id,
+        added: now,
+        first_name,
+        last_name,
+        email,
+        active: true,
+    });
+
+    id
 }
 
 #[query]
-fn get_counter() -> candid::Nat {
-    unsafe { COUNTER.as_mut().unwrap().clone() }
+fn get_users(active_filter: Option<bool>) -> Vec<User> {
+    RUNTIME_STATE.with(|state| get_impl4(active_filter, &state.borrow()))
 }
 
+fn get_impl4(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<User> {
+    runtime_state.data.users.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
+}
+
+// USER DOCUMENT
+
 #[update]
-fn set_counter(input: candid::Nat) -> () {
-    unsafe {
-        COUNTER.as_mut().unwrap().0 = input.0;
-    }
+fn add_user_document(
+        document_id: u32, user_id: u32, role: String)
+         -> u32 {
+    RUNTIME_STATE.with(|state| add_impl5(
+        document_id, user_id, role, &mut state.borrow_mut()))
+}
+
+fn add_impl5(document_id: u32, user_id: u32, role: String, runtime_state: &mut RuntimeState) -> u32 {
+    let id = runtime_state.env.random_u32();
+    let now = runtime_state.env.now();
+
+    runtime_state.data.userdocuments.push(UserDocument {
+        id,
+        added: now,
+        user_id,
+        document_id,
+        role,
+        can_edit: true,
+        signed: false,
+        active: true,
+    });
+
+    id
+}
+
+#[query]
+fn get_user_documents(active_filter: Option<bool>) -> Vec<UserDocument> {
+    RUNTIME_STATE.with(|state| get_impl6(active_filter, &state.borrow()))
+}
+
+fn get_impl6(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<UserDocument> {
+    runtime_state.data.userdocuments.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }

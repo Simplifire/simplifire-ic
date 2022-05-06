@@ -1,27 +1,47 @@
 type TimestampMillis = nat64;
 
-type TodoItem =
+type Document =
     record {
         id: nat32;
-        added: TimestampMillis;
         name: text;
         content: text;
-        done: bool;
+        active: bool;
+        added: TimestampMillis;
     };
 
-service: {
-    add: (text) -> (nat32);
-    get: (opt bool) -> (vec TodoItem) query;
-    mark_done: (id: nat32) -> (bool);
+type User =
+    record {
+        id: nat32;
+        first_name: text;
+        last_name: text;
+        email: text;
+        active: bool;
+        added: TimestampMillis; 
+    };
 
+type UserDocument =
+    record {
+        id: nat32;
+        document_id: nat32;
+        user_id: nat32;
+        role: text;
+        can_edit: bool;
+        signed: bool;
+        active: bool;
+    }
+
+service: {
 
     add_doc: (text, text) -> ();
-    get_docs: (opt bool) -> (vec TodoItem) query;
+    get_docs: (opt bool) -> (vec Document) query;
+    update_doc: (id: nat32, text) -> (bool);
 
-    "increment_counter": () -> ();
-    "get_counter": () -> (nat) query;
-    "set_counter": (nat) -> ();
+    add_user: (text, text, text) -> ();
+    get_users: (opt bool) -> (vec User) query;
 
+    add_user_document: (document_id: nat32, user_id: nat32, text) -> ();
+    get_user_documents: (opt bool) -> (vec UserDocument) query;
+    
 }
 
 

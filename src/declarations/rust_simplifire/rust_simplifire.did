@@ -1,3 +1,4 @@
+type TimestampMillis = nat64;
 
 type Document =
     record {
@@ -42,3 +43,5 @@ service: {
     get_user_documents: (opt bool) -> (vec UserDocument) query;
     
 }
+
+

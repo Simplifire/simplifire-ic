@@ -4,9 +4,12 @@
     id="sidenav-collapse-main"
   >
     <ul class="navbar-nav">
-      <sidenav-item :to="{ name: 'Projects' }" miniIcon="P" text="Projects" />
+      <sidenav-item :to="{ name: 'Sales' }" miniIcon="D" text="Dashboard" />
 
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <sidenav-item :to="{ name: 'Projects' }" miniIcon="P" text="Documents" />
+      <sidenav-item :to="{ name: 'Projects' }" miniIcon="U" text="Users" />
+
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="dashboardsExamples"
           navText="Dashboards"
@@ -28,7 +31,7 @@
           </template>
         </sidenav-collapse>
       </li>
-      <li class="mt-3 nav-item">
+      <li v-if="isDebug" class="mt-3 nav-item">
         <h6
           class="text-xs ps-4 text-uppercase font-weight-bolder text-white"
           :class="this.$store.state.isRTL ? 'me-4' : 'ms-2'"
@@ -36,7 +39,7 @@
           PAGES
         </h6>
       </li>
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="pagesExamples"
           navText="Pages"
@@ -145,7 +148,7 @@
         </sidenav-collapse>
       </li>
 
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="applicationsExamples"
           navText="Applications"
@@ -178,7 +181,7 @@
         </sidenav-collapse>
       </li>
 
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="ecommerceExamples"
           navText="Ecommerce"
@@ -238,7 +241,7 @@
         </sidenav-collapse>
       </li>
 
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="authExamples"
           navText="Authentication"
@@ -305,7 +308,7 @@
           </template>
         </sidenav-collapse>
       </li>
-      <li class="mt-3 nav-item">
+      <li v-if="isDebug" class="mt-3 nav-item">
         <hr class="horizontal light mt-0" />
         <h6
           class="text-xs ps-4 ms-2 text-uppercase font-weight-bolder text-white"
@@ -314,7 +317,7 @@
           DOCS
         </h6>
       </li>
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="basicExamples"
           navText="Basic"
@@ -468,7 +471,7 @@
           </template>
         </sidenav-collapse>
       </li>
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="componentsExamples"
           navText="Components"
@@ -739,7 +742,7 @@
           </template>
         </sidenav-collapse>
       </li>
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
+      <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           navText="Changelog"
           v-bind:collapse="false"
@@ -770,6 +773,7 @@ export default {
       title: "Soft UI Dashboard PRO",
       controls: "dashboardsExamples",
       isActive: "active",
+      isDebug: true
     };
   },
   components: {

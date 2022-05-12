@@ -4,38 +4,8 @@
     id="sidenav-collapse-main"
   >
     <ul class="navbar-nav">
-      <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
-        <sidenav-collapse
-          collapseRef="brooklynAlice"
-          navText="Brooklyn Alice"
-          :class="getRoute() === 'brooklynAlice' ? 'active' : ''"
-        >
-          <template v-slot:icon>
-            <img src="~/assets/img/team-3.jpg" class="avatar" />
-          </template>
-          <template v-slot:list>
-            <ul class="nav pe-0">
-              <!-- nav links -->
-              <sidenav-item
-                :to="{ name: 'Profile Overview' }"
-                miniIcon="MP"
-                text="My Profile"
-              />
-              <sidenav-item
-                :to="{ name: 'Settings' }"
-                miniIcon="S"
-                text="Settings"
-              />
-              <sidenav-item
-                :to="{ name: 'Signin Basic' }"
-                miniIcon="L"
-                text="Logout"
-              />
-            </ul>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <hr class="horizontal light mt-2 mb-2" />
+      <sidenav-item :to="{ name: 'Projects' }" miniIcon="P" text="Projects" />
+
       <li class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
           collapseRef="dashboardsExamples"

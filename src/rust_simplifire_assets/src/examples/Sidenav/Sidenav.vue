@@ -16,13 +16,7 @@
       ></i>
       <a class="m-0 navbar-brand" href="/">
         <img
-          :src="
-            this.$store.state.sidebarType === 'bg-white' ||
-            (this.$store.state.sidebarType === 'bg-transparent' &&
-              !this.$store.state.isDarkMode)
-              ? logoDark
-              : logo
-          "
+          src="/img/logos/logo.svg"
           class="navbar-brand-img h-100"
           alt="main_logo"
         />
@@ -47,8 +41,6 @@ export default {
   },
   data() {
     return {
-      logo,
-      logoDark,
     };
   },
   props: ["custom_class"],

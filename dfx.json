@@ -10,7 +10,7 @@
         "rust_simplifire"
       ],
       "frontend": {
-        "entrypoint": "src/rust_simplifire_assets/src/index.html"
+        "entrypoint": "dist/rust_simplifire_assets/index.html"
       },
       "source": [
         "dist/rust_simplifire_assets/"

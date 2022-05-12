@@ -31,7 +31,7 @@
                     <div class="px-2 py-1 d-flex">
                       <div>
                         <img
-                          src="assets/img/small-logos/logo-xd.svg"
+                          src="~/assets/img/small-logos/logo-xd.svg"
                           class="avatar avatar-sm me-2"
                           alt="logo_xd"
                         />
@@ -50,7 +50,7 @@
                     <div class="px-2 py-1 d-flex">
                       <div>
                         <img
-                          src="assets/img/small-logos/logo-atlassian.svg"
+                          src="~/assets/img/small-logos/logo-atlassian.svg"
                           class="avatar avatar-sm me-2"
                           alt="logo_atlassian"
                         />
@@ -69,7 +69,7 @@
                     <div class="px-2 py-1 d-flex">
                       <div>
                         <img
-                          src="assets/img/small-logos/logo-slack.svg"
+                          src="~/assets/img/small-logos/logo-slack.svg"
                           class="avatar avatar-sm me-2"
                           alt="logo_slack"
                         />
@@ -88,7 +88,7 @@
                     <div class="px-2 py-1 d-flex">
                       <div>
                         <img
-                          src="assets/img/small-logos/logo-spotify.svg"
+                          src="~/assets/img/small-logos/logo-spotify.svg"
                           class="avatar avatar-sm me-2"
                           alt="logo_spotify"
                         />
@@ -107,7 +107,7 @@
                     <div class="px-2 py-1 d-flex">
                       <div>
                         <img
-                          src="assets/img/small-logos/logo-jira.svg"
+                          src="~/assets/img/small-logos/logo-jira.svg"
                           class="avatar avatar-sm me-2"
                           alt="logo_jira"
                         />

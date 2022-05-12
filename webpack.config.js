@@ -64,6 +64,7 @@ module.exports = {
     output: {
         filename: "index.js",
         path: path.join(__dirname, "dist", frontendDirectory),
+        publicPath: 'auto'
     },
 
     // Depending in the language or framework you are using for
@@ -76,20 +77,21 @@ module.exports = {
             { test: /\.css$/, use: ["vue-style-loader", "css-loader"] },
             { test: /\.scss$/, use: ['style-loader','css-loader','sass-loader',] },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jp(e*)g|gif|ico|svg)$/,
                 loader: "file-loader",
                 options: {
                     name: "[name].[ext]?[hash]",
+                    outputPath: (url, resourcePath, context) => {
+                        // `resourcePath` is original absolute path to asset
+                        // `context` is directory where stored asset (`rootContext`) or `context` option
+
+                        // To get relative path you can use
+                        // const relativePath = path.relative(context, resourcePath);
+                        return path.relative(context, resourcePath);
+                    }
                 },
             },
             { test: /\.vue$/, loader: "vue-loader" },
-            {
-                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
-                loader: "url-loader",
-                options: {
-                    limit: 1000
-                },
-            },
         ],
     },
     plugins: [
@@ -100,14 +102,14 @@ module.exports = {
             chunks: ["index"],
             cache: false,
         }),
-        // new CopyPlugin({
-        //     patterns: [
-        //         {
-        //             from: path.join(__dirname, "src", frontendDirectory, "assets"),
-        //             to: path.join(__dirname, "dist", frontendDirectory),
-        //         },
-        //     ],
-        // }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.join(__dirname, "src", frontendDirectory, "assets", "img"),
+                    to: path.join(__dirname, "dist", frontendDirectory, "assets", "img"),
+                },
+            ],
+        }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: "development",
             ...canisterEnvVariables,

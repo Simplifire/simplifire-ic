@@ -252,7 +252,7 @@
                     >
                       <img
                         class="w-50 position-relative z-index-2"
-                        src="assets/img/illustrations/rocket-white.png"
+                        src="~/assets/img/illustrations/rocket-white.png"
                         alt="illustration"
                       />
                     </div>

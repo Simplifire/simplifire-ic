@@ -186,7 +186,7 @@
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img
-                              src="assets/img/small-logos/devto.svg"
+                              src="~/assets/img/small-logos/devto.svg"
                               class="avatar avatar-sm me-2"
                               alt="logo_xd"
                             />
@@ -207,7 +207,7 @@
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img
-                              src="assets/img/small-logos/creative-tim.svg"
+                              src="~/assets/img/small-logos/creative-tim.svg"
                               class="avatar avatar-sm me-2"
                               alt="logo_atlassian"
                             />
@@ -228,7 +228,7 @@
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img
-                              src="assets/img/small-logos/bootstrap.svg"
+                              src="~/assets/img/small-logos/bootstrap.svg"
                               class="avatar avatar-sm me-2"
                               alt="logo_slack"
                             />
@@ -249,7 +249,7 @@
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img
-                              src="assets/img/small-logos/github.svg"
+                              src="~/assets/img/small-logos/github.svg"
                               class="avatar avatar-sm me-2"
                               alt="logo_spotify"
                             />
@@ -270,7 +270,7 @@
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img
-                              src="assets/img/small-logos/google-webdev.svg"
+                              src="~/assets/img/small-logos/google-webdev.svg"
                               class="avatar avatar-sm me-2"
                               alt="logo_jira"
                             />

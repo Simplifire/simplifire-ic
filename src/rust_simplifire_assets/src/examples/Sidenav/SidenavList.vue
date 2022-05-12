@@ -11,7 +11,7 @@
           :class="getRoute() === 'brooklynAlice' ? 'active' : ''"
         >
           <template v-slot:icon>
-            <img src="assets/img/team-3.jpg" class="avatar" />
+            <img src="~/assets/img/team-3.jpg" class="avatar" />
           </template>
           <template v-slot:list>
             <ul class="nav pe-0">

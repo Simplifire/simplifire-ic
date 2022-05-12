@@ -19,7 +19,7 @@
         <div class="col-12 col-sm-4">
           <div class="avatar avatar-xxl position-relative">
             <img
-              src="assets/img/team-2.jpg"
+              src="~/assets/img/team-2.jpg"
               class="border-radius-md"
               alt="team-2"
             />

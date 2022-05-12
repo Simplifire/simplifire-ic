@@ -9,7 +9,7 @@
               <div class="col-xl-5 col-lg-6 text-center">
                 <img
                   class="w-100 border-radius-lg shadow-lg mx-auto"
-                  src="assets/img/products/product-details-1.jpg"
+                  src="~/assets/img/products/product-details-1.jpg"
                   alt="chair"
                 />
                 <div
@@ -29,7 +29,7 @@
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="assets/img/products/product-details-2.jpg"
+                        src="~/assets/img/products/product-details-2.jpg"
                         alt="Image description"
                       />
                     </a>
@@ -47,7 +47,7 @@
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="assets/img/products/product-details-3.jpg"
+                        src="~/assets/img/products/product-details-3.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />
@@ -66,7 +66,7 @@
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="assets/img/products/product-details-4.jpg"
+                        src="~/assets/img/products/product-details-4.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />
@@ -85,7 +85,7 @@
                     >
                       <img
                         class="w-100 min-height-100 max-height-100 border-radius-lg shadow"
-                        src="assets/img/products/product-details-5.jpg"
+                        src="~/assets/img/products/product-details-5.jpg"
                         itemprop="thumbnail"
                         alt="Image description"
                       />

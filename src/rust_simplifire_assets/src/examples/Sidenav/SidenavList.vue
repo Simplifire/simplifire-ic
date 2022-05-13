@@ -7,7 +7,7 @@
       <sidenav-item :to="{ name: 'Dashboard' }" miniIcon="D" text="Dashboard" />
 
       <sidenav-item :to="{ name: 'Documents' }" miniIcon="P" text="Documents" />
-      <sidenav-item :to="{ name: 'Documents' }" miniIcon="U" text="Users" />
+      <sidenav-item :to="{ name: 'Users' }" miniIcon="U" text="Users" />
 
       <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse
@@ -773,7 +773,7 @@ export default {
       title: "Soft UI Dashboard PRO",
       controls: "dashboardsExamples",
       isActive: "active",
-      isDebug: true
+      isDebug: false
     };
   },
   components: {

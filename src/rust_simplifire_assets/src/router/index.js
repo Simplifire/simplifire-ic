@@ -32,6 +32,7 @@ import Illustration from "../views/auth/signin/Illustration.vue";
 import ResetCover from "../views/auth/reset/Cover.vue";
 import SignupCover from "../views/auth/signup/Cover.vue";
 
+import Users from "../views/users/Users.vue"
 import Documents from "../views/documents/Documents.vue"
 import NewDocument from "../views/documents/NewDocument.vue"
 
@@ -55,6 +56,11 @@ const routes = [
     path: "/documents/new",
     name: "NewDocument",
     component: NewDocument
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Users
   },
   /////////
   {

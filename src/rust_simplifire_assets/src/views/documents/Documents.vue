@@ -40,7 +40,7 @@
 import { DataTable } from "simple-datatables";
 import VmdButton from "components/VmdButton.vue";
 export default {
-    name: "Projects",
+    name: "Documents",
     components: {
         VmdButton,
     },

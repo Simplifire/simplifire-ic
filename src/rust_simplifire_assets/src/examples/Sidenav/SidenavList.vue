@@ -6,8 +6,8 @@
     <ul class="navbar-nav">
       <sidenav-item :to="{ name: 'Sales' }" miniIcon="D" text="Dashboard" />
 
-      <sidenav-item :to="{ name: 'Projects' }" miniIcon="P" text="Documents" />
-      <sidenav-item :to="{ name: 'Projects' }" miniIcon="U" text="Users" />
+      <sidenav-item :to="{ name: 'Documents' }" miniIcon="P" text="Documents" />
+      <sidenav-item :to="{ name: 'Documents' }" miniIcon="U" text="Users" />
 
       <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse

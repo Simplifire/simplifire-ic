@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Default from "../views/dashboards/Default.vue";
 import Sales from "../views/dashboards/Sales.vue";
 import Overview from "../views/pages/profile/Overview.vue";
-// import Projects from "../views/pages/profile/Projects.vue";
+import Projects from "../views/pages/profile/Projects.vue";
 import General from "../views/pages/projects/General.vue";
 import Timeline from "../views/pages/projects/Timeline.vue";
 import NewProject from "../views/pages/projects/NewProject.vue";
@@ -32,7 +32,7 @@ import Illustration from "../views/auth/signin/Illustration.vue";
 import ResetCover from "../views/auth/reset/Cover.vue";
 import SignupCover from "../views/auth/signup/Cover.vue";
 
-import Projects from "../views/projects/Projects.vue"
+import Documents from "../views/documents/Documents.vue"
 
 const routes = [
   {
@@ -41,9 +41,9 @@ const routes = [
     redirect: "/dashboards/dashboard-default",
   },
   {
-    path: "/projects",
-    name: "Projects",
-    component: Projects
+    path: "/documents",
+    name: "Documents",
+    component: Documents
   },
   {
     path: "/dashboards/dashboard-default",

@@ -33,6 +33,7 @@ import ResetCover from "../views/auth/reset/Cover.vue";
 import SignupCover from "../views/auth/signup/Cover.vue";
 
 import Documents from "../views/documents/Documents.vue"
+import NewDocument from "../views/documents/NewDocument.vue"
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: "/documents",
     name: "Documents",
     component: Documents
+  },
+  {
+    path: "/documents/new",
+    name: "NewDocument",
+    component: NewDocument
   },
   {
     path: "/dashboards/dashboard-default",

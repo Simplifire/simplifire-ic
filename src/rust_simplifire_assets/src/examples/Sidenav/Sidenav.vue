@@ -16,7 +16,7 @@
       ></i>
       <a class="m-0 navbar-brand text-center" href="/">
         <img
-          src="assets/img/logos/logo.svg"
+          src="/assets/img/logos/logo.svg"
           class="navbar-brand-img"
           alt="Simplifire IC Logo"
         />

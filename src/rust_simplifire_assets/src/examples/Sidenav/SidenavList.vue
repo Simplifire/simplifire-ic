@@ -4,7 +4,7 @@
     id="sidenav-collapse-main"
   >
     <ul class="navbar-nav">
-      <sidenav-item :to="{ name: 'Sales' }" miniIcon="D" text="Dashboard" />
+      <sidenav-item :to="{ name: 'Dashboard' }" miniIcon="D" text="Dashboard" />
 
       <sidenav-item :to="{ name: 'Documents' }" miniIcon="P" text="Documents" />
       <sidenav-item :to="{ name: 'Documents' }" miniIcon="U" text="Users" />
@@ -22,7 +22,7 @@
             <ul class="nav pe-0">
               <!-- nav links -->
               <sidenav-item
-                :to="{ name: 'Default' }"
+                :to="{ name: 'Dashboard' }"
                 miniIcon="D"
                 text="Analytics"
               />

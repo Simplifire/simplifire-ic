@@ -39,7 +39,12 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/dashboards/dashboard-default",
+    redirect: "/dashboard",
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Default,
   },
   {
     path: "/documents",
@@ -51,11 +56,7 @@ const routes = [
     name: "NewDocument",
     component: NewDocument
   },
-  {
-    path: "/dashboards/dashboard-default",
-    name: "Default",
-    component: Default,
-  },
+  /////////
   {
     path: "/dashboards/sales",
     name: "Sales",

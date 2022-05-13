@@ -38,10 +38,12 @@ service: {
 
     add_user: (text, text, text) -> (); // field names: (first_name, last_name, email)
     get_users: (opt bool) -> (vec User) query;
+  
     update_user: (id: nat32, text, text, text, bool) -> (); // field names: (id, first_name, last_name, email, active)
 
     add_user_document: (document_id: nat32, user_id: nat32, text) -> (); //field names: (document_id, user_id, role) 
     get_user_documents: (opt bool) -> (vec UserDocument) query;
+
     update_user_doc: (id: nat32, nat32, nat32, text, bool) -> (); // field names: (id, document_id, user_id, can_edit)
 }
 

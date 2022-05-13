@@ -98,7 +98,6 @@ fn post_upgrade() {
 fn add_doc(name: String, content: String) -> u32 {
     RUNTIME_STATE.with(|state| add_impl2(name, content, &mut state.borrow_mut()))
 }
-
 fn add_impl2(name: String, content: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
@@ -118,7 +117,6 @@ fn add_impl2(name: String, content: String, runtime_state: &mut RuntimeState) ->
 fn get_docs(active_filter: Option<bool>) -> Vec<Document> {
     RUNTIME_STATE.with(|state| get_impl2(active_filter, &state.borrow()))
 }
-
 fn get_impl2(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
     runtime_state.data.documents.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
@@ -127,7 +125,6 @@ fn get_impl2(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<D
 fn update_doc(id: u32, content: String) -> bool {
     RUNTIME_STATE.with(|state| update_doc_impl(id, content, &mut state.borrow_mut()))
 }
-
 fn update_doc_impl(id: u32, content: String, runtime_state: &mut RuntimeState) -> bool {
     if let Some(document) = runtime_state.data.documents.iter_mut().find(|i| i.id == id) {
         document.active = true;
@@ -144,7 +141,6 @@ fn update_doc_impl(id: u32, content: String, runtime_state: &mut RuntimeState) -
 fn add_user(first_name: String, last_name: String, email: String) -> u32 {
     RUNTIME_STATE.with(|state| add_impl3(first_name, last_name, email, &mut state.borrow_mut()))
 }
-
 fn add_impl3(first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
@@ -168,6 +164,21 @@ fn get_users(active_filter: Option<bool>) -> Vec<User> {
 
 fn get_impl4(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<User> {
     runtime_state.data.users.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
+}
+
+#[update]
+fn update_user(id: u32, first_name: String, second_name: String, email: String) -> bool {
+    RUNTIME_STATE.with(|state| update_user_impl(id, first_name, second_name, email, &mut state.borrow_mut()))
+}
+fn update_user_impl(id: u32, first_name: String, second_name: String, email: String, runtime_state: &mut RuntimeState) -> bool {
+    if let Some(user) = runtime_state.data.users.iter_mut().find(|i| i.id == id) {
+        user.first_name = first_name;
+        user.last_name = second_name;
+        user.email = email;
+        true
+    } else {
+        false
+    }
 }
 
 // USER DOCUMENT
@@ -197,7 +208,6 @@ fn add_impl5(document_id: u32, user_id: u32, role: String, runtime_state: &mut R
 
     id
 }
-
 #[query]
 fn get_user_documents(active_filter: Option<bool>) -> Vec<UserDocument> {
     RUNTIME_STATE.with(|state| get_impl6(active_filter, &state.borrow()))
@@ -205,4 +215,20 @@ fn get_user_documents(active_filter: Option<bool>) -> Vec<UserDocument> {
 
 fn get_impl6(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<UserDocument> {
     runtime_state.data.userdocuments.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
+}
+
+#[update]
+fn update_user_doc(id: u32, document_id: u32, user_id: u32, role: String, can_edit: bool) -> bool {
+    RUNTIME_STATE.with(|state| update_user_doc_impl(id, document_id, user_id, role, can_edit, &mut state.borrow_mut()))
+}
+fn update_user_doc_impl(id: u32, document_id: u32, user_id: u32, role: String, can_edit: bool, runtime_state: &mut RuntimeState) -> bool {
+    if let Some(user_doc) = runtime_state.data.userdocuments.iter_mut().find(|i| i.id == id) {
+        user_doc.document_id = document_id;
+        user_doc.user_id = user_id;
+        user_doc.role = role;
+        user_doc.can_edit = can_edit;
+        true
+    } else {
+        false
+    }
 }

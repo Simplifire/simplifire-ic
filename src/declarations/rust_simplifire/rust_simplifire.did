@@ -32,16 +32,18 @@ type UserDocument =
 
 service: {
 
-    add_doc: (text, text) -> ();
+    add_doc: (text, text) -> (); // field names: (name, content)
     get_docs: (opt bool) -> (vec Document) query;
     update_doc: (id: nat32, text) -> (bool);
 
     add_user: (text, text, text) -> ();
     get_users: (opt bool) -> (vec User) query;
+    // Attributes: id, first_name
+    update_user: (id: nat32, text, text, text, bool) -> ();
 
     add_user_document: (document_id: nat32, user_id: nat32, text) -> ();
     get_user_documents: (opt bool) -> (vec UserDocument) query;
-    
+    update_user_doc: (id: nat32, nat32, nat32, text, bool) -> ();
 }
 
 

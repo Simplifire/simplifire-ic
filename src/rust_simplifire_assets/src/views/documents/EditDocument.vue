@@ -3,16 +3,10 @@
         <div class="row">
             <div class="mx-auto col-lg-12 col-12">
                 <div class="mt-4 card card-body">
-                    <h6 class="mb-0">New Document</h6>
-                    <p class="mb-0 text-sm">Create new document</p>
+                    <h6 class="mb-0">Edit Document</h6>
+                    <p class="mb-0 text-sm">Edit existing document</p>
                     <hr class="my-3 horizontal dark" />
-                    <vmd-input
-                        class="form-control"
-                        label="Document Name"
-                        id="documentName"
-                        variant="dynamic"
-                        v-model="name"
-                    />
+                    <strong>{{ editedDocument.name }}</strong>
 
                     <label class="mt-4">Document Content</label>
                     <!-- <p class="text-xs form-text text-muted ms-1">
@@ -29,9 +23,9 @@
                             type="button"
                             name="button"
                             class="m-0 btn bg-gradient-success ms-2"
-                            @click="addDocument"
+                            @click="updateDocument"
                         >
-                            Create Document
+                            Save Document
                         </button>
                     </div>
                 </div>
@@ -49,27 +43,37 @@ export default {
     name: "new-project",
     data() {
         return {
-            name: "",
             editor: ClassicEditor,
             editorData: "<p></p>",
             editorConfig: {
                 toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "blockQuote"],
             },
+            editedDocument: {},
         };
     },
     components: {
         VmdInput,
     },
-    mounted() {},
+    mounted() {
+        console.log(this.$route.params.id);
+        this.loadDocument();
+    },
 
     methods: {
-        async addDocument() {
-            console.log("add document");
-            console.log(this.name);
-            console.log(this.editorData);
+        async loadDocument() {
+            //TODO: Get document by id
+            const documents = await rust_simplifire.get_docs([]);
 
-            await rust_simplifire.add_doc(this.name, this.editorData);
-
+            const matchingDoc = documents.filter((d) => d.id == this.$route.params.id);
+            if (matchingDoc && matchingDoc.length > 0) {
+                this.editedDocument = matchingDoc[0];
+                this.editorData = this.editedDocument.content;
+            } else {
+                alert("Document not found");
+            }
+        },
+        async updateDocument() {
+            await rust_simplifire.update_doc(this.editedDocument.id, this.editorData);
             this.$router.push({ name: "Documents" });
         },
     },

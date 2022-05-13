@@ -35,6 +35,7 @@ import SignupCover from "../views/auth/signup/Cover.vue";
 import Users from "../views/users/Users.vue"
 import Documents from "../views/documents/Documents.vue"
 import NewDocument from "../views/documents/NewDocument.vue"
+import EditDocument from "../views/documents/EditDocument.vue"
 
 const routes = [
   {
@@ -54,8 +55,13 @@ const routes = [
   },
   {
     path: "/documents/new",
-    name: "NewDocument",
+    name: "New Document",
     component: NewDocument
+  },
+  {
+    path: "/documents/edit/:id",
+    name: "Edit Document",
+    component: EditDocument
   },
   {
     path: "/users",

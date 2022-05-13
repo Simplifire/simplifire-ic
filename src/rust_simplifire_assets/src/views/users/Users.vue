@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid py-4">
     <!-- <div class="mb-2">
-      <router-link :to="{ name: 'NewDocument' }">
+      <router-link :to="{ name: 'New Document' }">
         <vmd-button color="primary" variant="gradient">New document</vmd-button>
       </router-link>
     </div> -->

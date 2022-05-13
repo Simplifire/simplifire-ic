@@ -14,15 +14,12 @@
         aria-hidden="true"
         id="iconSidenav"
       ></i>
-      <a class="m-0 navbar-brand" href="/">
+      <a class="m-0 navbar-brand text-center" href="/">
         <img
-          src="/img/logos/logo.svg"
-          class="navbar-brand-img h-100"
-          alt="main_logo"
+          src="assets/img/logos/logo.svg"
+          class="navbar-brand-img"
+          alt="Simplifire IC Logo"
         />
-        <span class="ms-1 font-weight-bold text-white"
-          >Simplifire IC</span
-        >
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2" />

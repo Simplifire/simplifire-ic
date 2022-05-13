@@ -71,7 +71,7 @@
                         Dashboards
                       </div>
                       <router-link
-                        :to="{ name: 'Default' }"
+                        :to="{ name: 'Dashboard' }"
                         class="dropdown-item border-radius-md"
                       >
                         <span class="ps-3">Analytics</span>
@@ -220,9 +220,9 @@
                   Dashboards
                 </div>
                 <router-link
-                  :to="{ name: 'Default' }"
+                  :to="{ name: 'Dashboard' }"
                   class="dropdown-item border-radius-md"
-                  >Default</router-link
+                  >Dashboard</router-link
                 >
                 <router-link
                   :to="{ name: 'Sales' }"

@@ -10,10 +10,11 @@
       :class="getClasses(size)"
       :name="name"
       :id="id"
-      :value="value"
+      v-model="inputValue"
       :placeholder="placeholder"
       :isRequired="isRequired"
       :disabled="disabled"
+      @change="onChange"
     />
   </div>
 </template>
@@ -23,6 +24,7 @@ import setMaterialInput from "assets/js/material-input.js";
 
 export default {
   name: "vmd-input",
+  emits: ["update:modelValue"],
   props: {
     variant: {
       type: String,
@@ -47,13 +49,32 @@ export default {
     },
     name: String,
     id: String,
-    value: String,
+    // Optional
+    modelValue: {
+      type: String,
+      default: "",
+    },
     placeholder: String,
     type: {
       type: String,
       default: "text",
     },
     isRequired: Boolean,
+  },
+  data() {
+    return {
+      inputValue: "",
+    };
+  },
+  watch: {
+    inputValue(newValue) {
+      console.log('changing');
+      if (newValue === this.modelValue) {
+        return;
+      }
+
+      this.$emit("update:modelValue", newValue);
+    },
   },
   methods: {
     getClasses: (size) => {
@@ -76,6 +97,9 @@ export default {
 
       return isValidValue;
     },
+    onChange() {
+      this.$emit("update:modelValue", this.inputValue);
+    }
   },
   mounted() {
     setMaterialInput();

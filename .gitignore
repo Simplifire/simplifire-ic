@@ -2,6 +2,7 @@
 .vscode/
 .idea/
 **/*~
+vetur.config.js
 
 # Mac OSX temporary files
 .DS_Store

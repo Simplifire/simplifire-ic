@@ -55,6 +55,8 @@
     "last 2 edge version"
   ],
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-vue": "^4.0.0",
     "@popperjs/core": "2.10.2",
     "bootstrap": "5.1.3",
     "chart.js": "3.6.0",

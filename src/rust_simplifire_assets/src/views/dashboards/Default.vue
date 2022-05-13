@@ -28,13 +28,14 @@
                                     </div>
                                     <div class="mb-3">
                                         <div class="input-group">
-                                            <input
+                                            <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                                            <!--<input
                                                 class="form-control"
                                                 name="content"
                                                 v-model="content"
                                                 placeholder="Content"
                                                 style="border: 1px solid #778899; padding: 5px"
-                                            />
+                                            />-->
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -67,6 +68,7 @@ import "assets/js/world.js";
 
 import VmdInput from "components/VmdInput.vue";
 import VmdButton from "components/VmdButton.vue";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { rust_simplifire } from "../../../../declarations/rust_simplifire";
 
@@ -76,7 +78,11 @@ export default {
         return {
             documents: [],
             name: "",
-            content: "",
+            editor: ClassicEditor,
+            editorData: '<p>CKEditor for Simplifire.</p>',
+            editorConfig: {
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+            },
         };
     },
     components: { VmdInput, VmdButton },
@@ -92,9 +98,9 @@ export default {
         async addDocument() {
             console.log("add document");
             console.log(this.name);
-            console.log(this.content);
+            console.log(this.editorData);
 
-            await rust_simplifire.add_doc(this.name, this.content);
+            await rust_simplifire.add_doc(this.name, this.editorData);
 
             this.documents = await rust_simplifire.get_docs([]);
         },

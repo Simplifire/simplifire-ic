@@ -7,6 +7,7 @@ import "./../assets/css/nucleo-svg.css";
 import VueTilt from "vue-tilt.js";
 import VueSweetalert2 from "vue-sweetalert2";
 import MaterialDashboard from "./material-dashboard";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
 // const doc = ({
 //       id: 1,
@@ -45,4 +46,5 @@ appInstance.use(router);
 appInstance.use(VueTilt);
 appInstance.use(VueSweetalert2);
 appInstance.use(MaterialDashboard);
+appInstance.use(CKEditor);
 appInstance.mount("#app");

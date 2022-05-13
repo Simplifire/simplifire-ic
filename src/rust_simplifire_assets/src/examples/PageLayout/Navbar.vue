@@ -373,7 +373,7 @@
 
                         <span>Sign In</span>
                         <img
-                          src="assets/img/down-arrow.svg"
+                          src="~/assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />
@@ -415,7 +415,7 @@
 
                         <span>Sign Up</span>
                         <img
-                          src="assets/img/down-arrow.svg"
+                          src="~/assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />
@@ -445,7 +445,7 @@
 
                         <span>Reset Password</span>
                         <img
-                          src="assets/img/down-arrow.svg"
+                          src="~/assets/img/down-arrow.svg"
                           alt="down-arrow"
                           class="arrow ms-auto"
                         />

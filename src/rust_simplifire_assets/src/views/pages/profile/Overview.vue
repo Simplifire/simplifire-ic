@@ -13,7 +13,7 @@
         <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
             <img
-              src="assets/img/bruce-mars.jpg"
+              src="~/assets/img/bruce-mars.jpg"
               alt="profile_image"
               class="shadow-sm w-100 border-radius-lg"
             />
@@ -475,7 +475,7 @@
                   <div class="card-header p-0 mt-n4 mx-3">
                     <a class="d-block shadow-xl border-radius-xl">
                       <img
-                        src="assets/img/home-decor-1.jpg"
+                        src="~/assets/img/home-decor-1.jpg"
                         alt="img-blur-shadow"
                         class="img-fluid shadow border-radius-xl"
                       />
@@ -509,7 +509,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-1.jpg"
+                            src="~/assets/img/team-1.jpg"
                           />
                         </a>
                         <a
@@ -521,7 +521,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-2.jpg"
+                            src="~/assets/img/team-2.jpg"
                           />
                         </a>
                         <a
@@ -533,7 +533,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-3.jpg"
+                            src="~/assets/img/team-3.jpg"
                           />
                         </a>
                         <a
@@ -545,7 +545,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-4.jpg"
+                            src="~/assets/img/team-4.jpg"
                           />
                         </a>
                       </div>
@@ -558,7 +558,7 @@
                   <div class="card-header p-0 mt-n4 mx-3">
                     <a class="d-block shadow-xl border-radius-xl">
                       <img
-                        src="assets/img/home-decor-2.jpg"
+                        src="~/assets/img/home-decor-2.jpg"
                         alt="img-blur-shadow"
                         class="img-fluid shadow border-radius-lg"
                       />
@@ -592,7 +592,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-3.jpg"
+                            src="~/assets/img/team-3.jpg"
                           />
                         </a>
                         <a
@@ -604,7 +604,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-4.jpg"
+                            src="~/assets/img/team-4.jpg"
                           />
                         </a>
                         <a
@@ -616,7 +616,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-1.jpg"
+                            src="~/assets/img/team-1.jpg"
                           />
                         </a>
                         <a
@@ -628,7 +628,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-2.jpg"
+                            src="~/assets/img/team-2.jpg"
                           />
                         </a>
                       </div>
@@ -641,7 +641,7 @@
                   <div class="card-header p-0 mt-n4 mx-3">
                     <a class="d-block shadow-xl border-radius-xl">
                       <img
-                        src="assets/img/home-decor-3.jpg"
+                        src="~/assets/img/home-decor-3.jpg"
                         alt="img-blur-shadow"
                         class="img-fluid shadow border-radius-xl"
                       />
@@ -675,7 +675,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-4.jpg"
+                            src="~/assets/img/team-4.jpg"
                           />
                         </a>
                         <a
@@ -687,7 +687,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-3.jpg"
+                            src="~/assets/img/team-3.jpg"
                           />
                         </a>
                         <a
@@ -699,7 +699,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-2.jpg"
+                            src="~/assets/img/team-2.jpg"
                           />
                         </a>
                         <a
@@ -711,7 +711,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-1.jpg"
+                            src="~/assets/img/team-1.jpg"
                           />
                         </a>
                       </div>
@@ -758,7 +758,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-4.jpg"
+                            src="~/assets/img/team-4.jpg"
                           />
                         </a>
                         <a
@@ -770,7 +770,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-3.jpg"
+                            src="~/assets/img/team-3.jpg"
                           />
                         </a>
                         <a
@@ -782,7 +782,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-2.jpg"
+                            src="~/assets/img/team-2.jpg"
                           />
                         </a>
                         <a
@@ -794,7 +794,7 @@
                         >
                           <img
                             alt="Image placeholder"
-                            src="assets/img/team-1.jpg"
+                            src="~/assets/img/team-1.jpg"
                           />
                         </a>
                       </div>

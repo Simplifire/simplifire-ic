@@ -27,7 +27,7 @@
           alt="main_logo"
         />
         <span class="ms-1 font-weight-bold text-white"
-          >Material Dashboard 2 PRO</span
+          >Simplifire IC</span
         >
       </a>
     </div>
@@ -37,7 +37,7 @@
 </template>
 <script>
 import SidenavList from "./SidenavList.vue";
-import logo from "assets/img/logo-ct.png";
+import logo from "assets/img/SimplifireLogo.png";
 import logoDark from "assets/img/logo-ct-dark.png";
 
 export default {

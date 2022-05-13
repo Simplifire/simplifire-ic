@@ -14,7 +14,7 @@
                 <div class="col-md-4 text-start">
                   <img
                     class="mb-2 w-25 p-2"
-                    src="assets/img/logo-ct.png"
+                    src="~/assets/img/logo-ct.png"
                     alt="Logo"
                   />
                   <h6>

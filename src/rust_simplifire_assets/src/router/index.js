@@ -41,7 +41,7 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/dashboard",
+    redirect: "/authentication/signin/basic",
   },
   {
     path: "/dashboard",

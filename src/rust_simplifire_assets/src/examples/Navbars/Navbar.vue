@@ -22,18 +22,21 @@
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
-            <!-- <router-link
+             <router-link
               :to="{ name: 'Signin Basic' }"
               class="px-0 nav-link font-weight-bold lh-1"
               :class="textWhite ? textWhite : 'text-body'"
-            > -->
+            >
               <i
                 class="material-icons"
                 :class="this.$store.state.isRTL ? 'ms-sm-2' : 'me-sm-1'"
               >
                 account_circle
               </i>
-            <!-- </router-link> -->
+             </router-link>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            {{ this.$store.state.email }}
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a

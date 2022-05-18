@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { rust_simplifire } from "../../../declarations/rust_simplifire";
 
 export default createStore({
   state: {
@@ -42,5 +43,21 @@ export default createStore({
       }
     },
   },
-  getters: {},
+  getters: {
+    async userDocs (state) {
+      const user_id = state.user_id;
+      const all_user_docs = await rust_simplifire.get_user_documents([]);
+      const user_docs = all_user_docs.filter(d => d.user_id === user_id);
+      const all_docs = await rust_simplifire.get_docs([]);
+      const documents = [];
+
+      user_docs?.forEach(d => {
+          if (all_docs.some(ad => ad.id === d.document_id)) {
+              documents.push(all_docs.find(ad => ad.id === d.document_id));
+          }
+      });
+      
+      return documents;
+    }
+  },
 });

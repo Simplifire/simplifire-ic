@@ -64,11 +64,8 @@ export default {
 
     methods: {
         async addDocument() {
-            console.log("add document");
-            console.log(this.name);
-            console.log(this.editorData);
-
-            await rust_simplifire.add_doc(this.name, this.editorData);
+            const doc_id = await rust_simplifire.add_doc(this.name, this.editorData);
+            await rust_simplifire.add_user_document(doc_id, this.$store.state.user_id, 'author');
 
             this.$router.push({ name: "Documents" });
         },

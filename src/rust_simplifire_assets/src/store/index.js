@@ -51,13 +51,26 @@ export default createStore({
       const all_docs = await rust_simplifire.get_docs([]);
       const documents = [];
 
+      
+      const all_users = await rust_simplifire.get_users([]);
+
       user_docs?.forEach(d => {
           if (all_docs.some(ad => ad.id === d.document_id)) {
-              documents.push(all_docs.find(ad => ad.id === d.document_id));
+            const document = all_docs.find(ad => ad.id === d.document_id);
+            const all_user_docs_for_this_document = all_user_docs.filter(a => a.document_id === d.document_id);
+            document.author = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "author")?.user_id)?.email;
+            document.sharedWith = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "counter_party")?.user_id)?.email;
+            
+            documents.push(document);
           }
       });
       
       return documents;
+    },
+    async users () {
+      const all_users = await rust_simplifire.get_users([]);
+
+      return all_users;
     }
   },
 });

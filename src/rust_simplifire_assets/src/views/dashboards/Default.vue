@@ -46,10 +46,24 @@ export default {
         };
     },
     components: { VmdInput, VmdButton },
+    computed: {
+        userDocs () {
+            return this.$store.getters.userDocs;
+        }
+    },
 
     async mounted() {
-        const documents = await rust_simplifire.get_docs([]);
-        this.numberOfDocuments = documents?.length ?? 0;
+        const email = this.$store.state.email;
+        if (email) {
+            const users = await rust_simplifire.get_users([]);
+            if (users.some(u => u.email === email)) {
+                this.$store.state.user_id = users.find(u => u.email === email).id;
+            } else {
+                this.$store.state.user_id = await rust_simplifire.add_user("", "", email ?? "");
+            }
+        }
+        const user_docs = await this.userDocs;
+        this.numberOfDocuments = await user_docs?.length ?? 0;
     },
 };
 </script>

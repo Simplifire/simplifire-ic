@@ -55,6 +55,11 @@ export default {
             documents: [],
         };
     },
+    computed: {
+        userDocs () {
+            return this.$store.getters.userDocs;
+        }
+    },
     async mounted() {
         // if (document.getElementById("documents-table")) {
         //   const dataTableSearch = new DataTable("#documents-table", {
@@ -64,10 +69,7 @@ export default {
         //   });
         // }
 
-        console.log("hey its documents view");
-        this.documents = await rust_simplifire.get_docs([]);
-
-        console.log(this.documents);
+        this.documents = await this.userDocs;
     },
     methods: {
         formatDate(time) {

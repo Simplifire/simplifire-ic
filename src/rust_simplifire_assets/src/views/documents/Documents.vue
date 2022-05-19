@@ -22,6 +22,14 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Create date
                                     </th>
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Author
+                                    </th>
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Shared with
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,6 +38,8 @@
                                         <router-link :to="{ name: 'Edit Document', params: {id: doc.id} }">{{ doc.name }}</router-link>
                                     </td>
                                     <td class="text-sm font-weight-normal">{{ formatDate(doc.added) }}</td>
+                                    <td class="text-sm font-weight-normal"><span class="badge rounded-pill bg-dark">{{ doc.author }}</span></td>
+                                    <td class="text-sm font-weight-normal"><span class="badge rounded-pill bg-dark">{{ doc.sharedWith }}</span></td>
                                 </tr>
                             </tbody>
                         </table>

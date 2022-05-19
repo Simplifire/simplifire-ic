@@ -15,6 +15,12 @@
             <table class="table table-flush" id="documents-table">
               <thead class="thead-light">
                 <tr>
+                   <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Email
+                  </th>
+                  <!--
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
@@ -26,19 +32,15 @@
                   >
                     Last name
                   </th>
-
-                  <th
-                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                  >
-                    Email
-                  </th>
+                  -->
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr v-for="doc in documents" :key="doc.id">
-                  <td class="text-sm font-weight-normal">{{ doc.name }}</td>
-                  <td class="text-sm font-weight-normal">{{ doc.added }}</td>
-                </tr> -->
+                <tr v-for="u in users" :key="u.id">
+                <td class="text-sm font-weight-normal">{{ u.email }}</td>
+                  <!--<td class="text-sm font-weight-normal"></td>
+                  <td class="text-sm font-weight-normal"></td>-->
+                </tr>
               </tbody>
             </table>
           </div>
@@ -64,7 +66,7 @@ export default {
     };
   },
   async mounted() {
-
+    this.users = (await this.$store.getters.users).filter(u => u.id !== this.$store.state.user_id);
   },
 };
 </script>

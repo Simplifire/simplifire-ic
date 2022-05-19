@@ -36,7 +36,13 @@
              </router-link>
           </li>
           <li class="nav-item d-flex align-items-center">
-            {{ this.$store.state.email }}
+            <router-link
+              :to="{ name: 'Signin Basic' }"
+              class="px-0 nav-link font-weight-bold lh-1"
+              :class="textWhite ? textWhite : 'text-body'"
+            >
+              <span class="badge rounded-pill bg-info">{{ this.$store.state.email }}</span>
+            </router-link>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a

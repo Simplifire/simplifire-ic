@@ -64,7 +64,7 @@ service: {
     get_user: (id: nat32) -> ();
     update_user: (id: nat32, principal_id: nat32, first_name: text, last_name: text, email: text) -> (); 
 
-    add_user_document: (document_id: nat32, user_id: nat32, role: text) -> ();
+    add_user_document: (document_id: nat32, user_id: nat32, role: text) -> (id: nat32);
     get_user_documents: (opt bool) -> (vec UserDocument) query;
     update_user_doc: (id: nat32, document_id: nat32, user_id: nat32, text, can_edit: bool) -> ();
 

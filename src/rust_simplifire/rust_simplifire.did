@@ -3,20 +3,25 @@ type TimestampMillis = nat64;
 type Document =
     record {
         id: nat32;
+        current_editor_id: nat32;
         name: text;
-        content: text;
         active: bool;
         added: TimestampMillis;
+        updated: TimestampMillis; 
+        deleted: TimestampMillis;
     };
 
 type User =
     record {
         id: nat32;
+        principal_id: nat32;
         first_name: text;
         last_name: text;
         email: text;
         active: bool;
         added: TimestampMillis; 
+        updated: TimestampMillis; 
+        deleted: TimestampMillis;
     };
 
 type UserDocument =
@@ -28,23 +33,46 @@ type UserDocument =
         can_edit: bool;
         signed: bool;
         active: bool;
-    }
+        added: TimestampMillis; 
+        updated: TimestampMillis;
+        deleted: TimestampMillis;
+    };
+
+type DocumentVersion =
+    record {
+        id: nat32;
+        document_id: nat32;
+        version_number: nat32;
+        editor_user_id: nat32;
+        content: text;
+        active: bool;
+        added: TimestampMillis; 
+        updated: TimestampMillis;
+        deleted: TimestampMillis;
+    };
+
 
 service: {
 
-    add_doc: (text, text) -> (nat32); // field names: (name, content)
+    add_doc: (current_editor_id: nat32, name: text) -> (id: nat32);     
     get_docs: (opt bool) -> (vec Document) query;
     get_doc: (id: nat32) -> ();
-    update_doc: (id: nat32, text) -> (bool); // field names: (id, content)
+    update_doc: (id: nat32, current_editor_id: nat32, name: text) -> (bool);
 
-    add_user: (text, text, text) -> (nat32); // field names: (first_name, last_name, email)
+    add_user: (principal_id: nat32, first_name: text, last_name: text, email: text) -> (nat32); 
     get_users: (opt bool) -> (vec User) query;
     get_user: (id: nat32) -> ();
-    update_user: (id: nat32, text, text, text, bool) -> (); // field names: (id, first_name, last_name, email, active)
+    update_user: (id: nat32, principal_id: nat32, first_name: text, last_name: text, email: text) -> (); 
 
-    add_user_document: (document_id: nat32, user_id: nat32, text) -> (); //field names: (document_id, user_id, role) 
+    add_user_document: (document_id: nat32, user_id: nat32, role: text) -> ();
     get_user_documents: (opt bool) -> (vec UserDocument) query;
-    update_user_doc: (id: nat32, nat32, nat32, text, bool) -> (); // field names: (id, document_id, user_id, can_edit)
+    update_user_doc: (id: nat32, document_id: nat32, user_id: nat32, text, can_edit: bool) -> ();
+
+    add_document_version: (document_id: nat32, version_number: nat32, editor_user_id: nat32, content: text) -> (id: nat32);  
+    get_document_versions: (opt bool) -> (vec DocumentVersion) query;
+    get_document_version: (id: nat32) -> (DocumentVersion) query;
+    update_document_version: (id: nat32, content: text) -> (); 
+
 }
 
 

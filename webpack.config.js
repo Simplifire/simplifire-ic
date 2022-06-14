@@ -118,6 +118,11 @@ module.exports = {
             Buffer: [require.resolve("buffer/"), "Buffer"],
             process: require.resolve("process/browser"),
         }),
+        new webpack.DefinePlugin({
+            // Drop Options API from bundle
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false
+        }),
     ],
     // proxy /api to port 8000 during development
     devServer: {

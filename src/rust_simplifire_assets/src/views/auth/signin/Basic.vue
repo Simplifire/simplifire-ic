@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { rust_simplifire } from "../../../../../declarations/rust_simplifire";
 import VmdInput from "components/VmdInput.vue";
 import VmdButton from "components/VmdButton.vue";
 
@@ -96,8 +97,21 @@ export default {
     this.$store.state.showSidenav = true;
     this.$store.state.showFooter = true;
   },
-  beforeRouteLeave() {
-    this.$store.state.email = this.email;
+  async beforeRouteLeave() {
+      if (this.email) {
+        const users = await rust_simplifire.get_users([]);
+
+        if (users.some(u => u.email === this.email)) {
+            this.$store.state.user_id = users.find(u => u.email === this.email).id;
+        } else {
+            this.$store.state.user_id = await rust_simplifire.add_user(0, "", "", this.email ?? "");
+        }
+
+        localStorage.user_track = btoa(this.email);
+        this.$store.state.email = this.email;
+      } else {
+        return false;
+      }
   },
 };
 </script>

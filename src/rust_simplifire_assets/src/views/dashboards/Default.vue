@@ -31,7 +31,6 @@
     </div>
 </template>
 <script>
-import { rust_simplifire } from "../../../../declarations/rust_simplifire";
 import "assets/js/world.js";
 
 import VmdInput from "components/VmdInput.vue";
@@ -53,15 +52,6 @@ export default {
     },
 
     async mounted() {
-        const email = this.$store.state.email;
-        if (email) {
-            const users = await rust_simplifire.get_users([]);
-            if (users.some(u => u.email === email)) {
-                this.$store.state.user_id = users.find(u => u.email === email).id;
-            } else {
-                this.$store.state.user_id = await rust_simplifire.add_user("", "", email ?? "");
-            }
-        }
         const user_docs = await this.userDocs;
         this.numberOfDocuments = await user_docs?.length ?? 0;
     },

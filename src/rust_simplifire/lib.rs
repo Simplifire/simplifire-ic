@@ -1,7 +1,5 @@
 mod env;
-mod user;
-mod document;
-mod user_document;
+mod endpoints;
 
 use crate::env::{CanisterEnv, EmptyEnv, Environment};
 use candid::CandidType;

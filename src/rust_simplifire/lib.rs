@@ -8,8 +8,6 @@ use std::cell::RefCell;
 
 type TimestampMillis = u64;
 
-// static mut COUNTER: Option<candid::Nat> = None;
-
 // WASM is single-threaded by nature. [RefCell] and [thread_local!] is used unsafe.
 // This is to ensure that the canister state can be used throughout.
 thread_local! {
@@ -97,8 +95,6 @@ fn init() {
     let runtime_state = RuntimeState { env, data };
 
     RUNTIME_STATE.with(|state| *state.borrow_mut() = runtime_state);
-
-//    unsafe {COUNTER = Some(candid::Nat::from(0)); }
 }
 
 #[pre_upgrade]
@@ -119,9 +115,9 @@ fn post_upgrade() {
 
 #[update]
 fn add_doc(current_editor_id: u32, name: String) -> u32 {
-    RUNTIME_STATE.with(|state| add_impl2(current_editor_id, name, &mut state.borrow_mut()))
+    RUNTIME_STATE.with(|state| add_doc_impl(current_editor_id, name, &mut state.borrow_mut()))
 }
-fn add_impl2(current_editor_id: u32, name: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_doc_impl(current_editor_id: u32, name: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
@@ -140,9 +136,9 @@ fn add_impl2(current_editor_id: u32, name: String, runtime_state: &mut RuntimeSt
 
 #[query]
 fn get_docs(active_filter: Option<bool>) -> Vec<Document> {
-    RUNTIME_STATE.with(|state| get_impl2(active_filter, &state.borrow()))
+    RUNTIME_STATE.with(|state| get_docs_impl(active_filter, &state.borrow()))
 }
-fn get_impl2(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
+fn get_docs_impl(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<Document> {
     runtime_state.data.documents.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 
@@ -173,9 +169,9 @@ fn update_doc_impl(id: u32, current_editor_id: u32, name: String, runtime_state:
 
 #[update]
 fn add_user(principal_id: u32, first_name: String, last_name: String, email: String) -> u32 {
-    RUNTIME_STATE.with(|state| add_impl3(principal_id, first_name, last_name, email, &mut state.borrow_mut()))
+    RUNTIME_STATE.with(|state| add_user_impl(principal_id, first_name, last_name, email, &mut state.borrow_mut()))
 }
-fn add_impl3(principal_id: u32, first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_user_impl(principal_id: u32, first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
@@ -198,10 +194,10 @@ fn add_impl3(principal_id: u32, first_name: String, last_name: String, email: St
 
 #[query]
 fn get_users(active_filter: Option<bool>) -> Vec<User> {
-    RUNTIME_STATE.with(|state| get_impl4(active_filter, &state.borrow()))
+    RUNTIME_STATE.with(|state| get_users_impl(active_filter, &state.borrow()))
 }
 
-fn get_impl4(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<User> {
+fn get_users_impl(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<User> {
     runtime_state.data.users.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 
@@ -226,11 +222,11 @@ fn update_user_impl(id: u32, first_name: String, second_name: String, email: Str
 fn add_user_document(
         document_id: u32, user_id: u32, role: String)
          -> u32 {
-    RUNTIME_STATE.with(|state| add_impl5(
+    RUNTIME_STATE.with(|state| add_user_document_impl(
         document_id, user_id, role, &mut state.borrow_mut()))
 }
 
-fn add_impl5(document_id: u32, user_id: u32, role: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_user_document_impl(document_id: u32, user_id: u32, role: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
@@ -251,10 +247,10 @@ fn add_impl5(document_id: u32, user_id: u32, role: String, runtime_state: &mut R
 }
 #[query]
 fn get_user_documents(active_filter: Option<bool>) -> Vec<UserDocument> {
-    RUNTIME_STATE.with(|state| get_impl6(active_filter, &state.borrow()))
+    RUNTIME_STATE.with(|state| get_user_documents_impl(active_filter, &state.borrow()))
 }
 
-fn get_impl6(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<UserDocument> {
+fn get_user_documents_impl(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<UserDocument> {
     runtime_state.data.userdocuments.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 
@@ -280,10 +276,10 @@ fn update_user_doc_impl(id: u32, document_id: u32, user_id: u32, role: String, c
 fn add_document_version(
         document_id: u32, version_number: u32, editor_user_id: u32, content: String)
          -> u32 {
-    RUNTIME_STATE.with(|state| add_impl10(
+    RUNTIME_STATE.with(|state| add_document_version_impl(
         document_id, version_number, editor_user_id, content, &mut state.borrow_mut()))
 }
-fn add_impl10(document_id: u32, version_number: u32, editor_user_id: u32, content: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_document_version_impl(document_id: u32, version_number: u32, editor_user_id: u32, content: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
@@ -304,10 +300,10 @@ fn add_impl10(document_id: u32, version_number: u32, editor_user_id: u32, conten
 
 #[query]
 fn get_document_versions(active_filter: Option<bool>) -> Vec<DocumentVersion> {
-    RUNTIME_STATE.with(|state| get_impl11(active_filter, &state.borrow()))
+    RUNTIME_STATE.with(|state| get_document_versions_impl(active_filter, &state.borrow()))
 }
 
-fn get_impl11(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<DocumentVersion> {
+fn get_document_versions_impl(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<DocumentVersion> {
     runtime_state.data.documentversions.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 

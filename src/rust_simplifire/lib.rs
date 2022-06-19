@@ -146,6 +146,14 @@ fn get_impl2(active_filter: Option<bool>, runtime_state: &RuntimeState) -> Vec<D
     runtime_state.data.documents.iter().filter(|i| active_filter.map_or(true, |d| i.active == d)).cloned().collect()
 }
 
+#[query]
+fn get_doc(doc_id: u32) -> Option<Document> {
+    RUNTIME_STATE.with(|state| get_doc_impl(doc_id, &state.borrow()))
+}
+fn get_doc_impl(doc_id: u32, runtime_state: &RuntimeState) -> Option<Document> {
+    runtime_state.data.documents.iter().filter(|i| i.id == doc_id).cloned().next()
+}
+
 #[update]
 fn update_doc(id: u32, current_editor_id: u32, name: String) -> bool {
     RUNTIME_STATE.with(|state| update_doc_impl(id, current_editor_id, name, &mut state.borrow_mut()))

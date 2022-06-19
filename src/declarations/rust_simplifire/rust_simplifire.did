@@ -56,7 +56,7 @@ service: {
 
     add_doc: (current_editor_id: nat32, name: text) -> (id: nat32);     
     get_docs: (opt bool) -> (vec Document) query;
-    get_doc: (id: nat32) -> ();
+    get_doc: (id: nat32) -> (opt Document) query;
     update_doc: (id: nat32, current_editor_id: nat32, name: text) -> (bool);
 
     add_user: (principal_id: nat32, first_name: text, last_name: text, email: text) -> (nat32); 

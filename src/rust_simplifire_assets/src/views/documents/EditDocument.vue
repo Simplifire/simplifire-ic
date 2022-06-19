@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <hr class="my-3 horizontal dark" />
-                    <strong>{{ editedDocument.name }}</strong>
+                    <strong>{{ editedDocument.name }}</strong><small class="text-muted">version: {{ latestVersion.version_number }}</small>
 
                     <label class="mt-4">Document Content</label>
 
@@ -94,6 +94,7 @@ import { rust_simplifire } from "../../../../declarations/rust_simplifire";
 import UserCard from "components/UserCard.vue";
 import VmdInput from "components/VmdInput.vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import DocumentService from "../../services/DocumentService";
 
 export default {
     name: "new-project",
@@ -105,6 +106,7 @@ export default {
                 toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "blockQuote"],
             },
             editedDocument: {},
+            latestVersion: {},
             users: [],
             author: null,
             sharedWith: null,
@@ -112,35 +114,44 @@ export default {
     },
     components: {
         VmdInput,
-        UserCard
+        UserCard,
     },
     async mounted() {
-        console.log(this.$route.params.id);
         this.loadDocument();
         this.users = await this.$store.getters.users;
     },
 
     methods: {
         async loadDocument() {
-            //TODO: Get document by id
-            const matchingDoc = await rust_simplifire.get_doc(this.$route.params.id);
+            const documentToEdit = await DocumentService.getDocumentById(this.$route.params.id);
 
-            if (matchingDoc) {
-                this.editedDocument = matchingDoc[0];
+            if (documentToEdit) {
+                this.editedDocument = documentToEdit;
                 this.editorData = this.editedDocument.content;
             } else {
                 console.error("Document not found");
             }
 
-            const all_user_docs = await rust_simplifire.get_user_documents([]);
-            const this_doc_user_docs = all_user_docs.filter(a => a.document_id == this.$route.params.id);
+            const allDocVersions = await DocumentService.getAllDocumentVersions(this.editedDocument.id);
+            allDocVersions.sort(function compareFn(a, b) {
+                return b.version_number - a.version_number;
+            });
 
+            this.latestVersion = allDocVersions[0] ?? null;
+
+            if (!this.latestVersion) {
+                console.error("Missing version");
+            }
+
+            this.editorData = this.latestVersion.content;
+
+            const this_doc_user_docs = await DocumentService.getDocumentUsers(this.editedDocument.id);
             if (this_doc_user_docs && this_doc_user_docs.length > 0) {
-                const author_user_doc = this_doc_user_docs.find(d => d.role === "author");
-                const counter_party = this_doc_user_docs.find(d => d.role === "counter_party");
+                const author_user_doc = this_doc_user_docs.find((d) => d.role === "author");
+                const counter_party = this_doc_user_docs.find((d) => d.role === "counter_party");
 
-                this.author = this.users.find(u => u.id === author_user_doc?.user_id);
-                this.sharedWith = this.users.find(u => u.id === counter_party?.user_id);
+                this.author = this.users.find((u) => u.id === author_user_doc?.user_id);
+                this.sharedWith = this.users.find((u) => u.id === counter_party?.user_id);
             } else {
                 console.error("Document user not found");
             }
@@ -150,20 +161,15 @@ export default {
             this.$router.push({ name: "Documents" });
         },
         async shareDocument(userId) {
-            await rust_simplifire.add_user_document(this.editedDocument.id, userId, "counter_party");
-            await rust_simplifire.update_doc(this.editedDocument.id, userId, this.editedDocument.name));
-            const new_version_id = await this.saveDocumentChanges(userId);
+            await DocumentService.shareDocumentWithUser(this.editedDocument.id, this.editedDocument.name, userId);
 
-            this.sharedWith = this.users.find(u => u.id === userId);
+            this.sharedWith = this.users.find((u) => u.id === userId);
             this.$router.push({ name: "Documents" });
         },
 
         async saveDocumentChanges(target_user_id) {
-            const all_document_versions = await rust_simplifire.get_document_versions([]);
-            const versions_of_edited_document = all_document_versions.filter(a => a.document_id == this.editedDocument.id);
-
-            return await rust_simplifire.add_document_version(this.editedDocument.id, versions_of_edited_document.length +1, target_user_id, this.editorData);
-        }
+            await DocumentService.saveDocumentChanges(this.editedDocument.id, target_user_id, this.editorData);
+        },
     },
 };
 </script>

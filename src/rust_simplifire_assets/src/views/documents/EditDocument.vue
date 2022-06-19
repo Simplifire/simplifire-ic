@@ -20,8 +20,7 @@
                                 name="button"
                                 class="m-2 btn bg-gradient-primary ms-2"
                                 data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                @click="shareDocument"
+                                data-bs-target="#shareModal"
                             >
                                 Share
                             </button>
@@ -60,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -76,7 +75,7 @@
                                 )"
                                 :key="user.id"
                                 :user="user"
-                                @share="shareDocument"
+                                @share="shareDocument(user.id)"
                             ></user-card>
                         </div>
                     </div>
@@ -90,7 +89,6 @@
 </template>
 
 <script>
-import { rust_simplifire } from "../../../../declarations/rust_simplifire";
 import UserCard from "components/UserCard.vue";
 import VmdInput from "components/VmdInput.vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -161,6 +159,7 @@ export default {
             this.$router.push({ name: "Documents" });
         },
         async shareDocument(userId) {
+            console.log('Share with: ' + userId);
             await DocumentService.shareDocumentWithUser(this.editedDocument.id, this.editedDocument.name, userId);
 
             this.sharedWith = this.users.find((u) => u.id === userId);

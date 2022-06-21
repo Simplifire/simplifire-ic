@@ -1,8 +1,5 @@
 <template>
-  <navbar btnBackground="bg-gradient-success" />
-  <div
-    class="page-header bg-gradient-info align-items-start min-vh-100"
-  >
+  <div class="page-header bg-gradient-info align-items-start min-vh-100">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
       <div class="row">
@@ -15,13 +12,18 @@
                 <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                   Sign in
                 </h4>
-                
               </div>
             </div>
             <div class="card-body">
               <form role="form" class="text-start mt-3">
                 <div class="mb-3">
-                  <vmd-input type="email" label="Email" name="email" required v-model="email" />
+                  <vmd-input
+                    type="email"
+                    label="Email"
+                    name="email"
+                    required
+                    v-model="email"
+                  />
                 </div>
                 <!--<div class="mb-3">
                   <vmd-input type="password" label="Password" name="password" />
@@ -58,8 +60,7 @@
           <div class="col-12 col-md-6 my-auto">
             <div class="copyright text-center text-sm text-white text-lg-start">
               © {{ new Date().getFullYear() }}, made with
-              <i class="fa fa-heart" aria-hidden="true"></i> by
-              Simplifire Team.
+              <i class="fa fa-heart" aria-hidden="true"></i> by Simplifire Team.
             </div>
           </div>
         </div>
@@ -69,6 +70,7 @@
 </template>
 
 <script>
+import { rust_simplifire } from "../../../../../declarations/rust_simplifire";
 import VmdInput from "components/VmdInput.vue";
 import VmdButton from "components/VmdButton.vue";
 
@@ -79,10 +81,10 @@ export default {
     VmdButton,
   },
   data() {
-        return {
-            email: '',
-        };
-    },
+    return {
+      email: "",
+    };
+  },
   beforeMount() {
     this.$store.state.hideConfigButton = true;
     this.$store.state.showNavbar = false;
@@ -95,8 +97,21 @@ export default {
     this.$store.state.showSidenav = true;
     this.$store.state.showFooter = true;
   },
-  beforeRouteLeave() {
-    this.$store.state.email = this.email;
-  }
+  async beforeRouteLeave() {
+      if (this.email) {
+        const users = await rust_simplifire.get_users([]);
+
+        if (users.some(u => u.email === this.email)) {
+            this.$store.state.user_id = users.find(u => u.email === this.email).id;
+        } else {
+            this.$store.state.user_id = await rust_simplifire.add_user(0, "", "", this.email ?? "");
+        }
+
+        localStorage.user_track = btoa(this.email);
+        this.$store.state.email = this.email;
+      } else {
+        return false;
+      }
+  },
 };
 </script>

@@ -37,6 +37,8 @@ import Documents from "../views/documents/Documents.vue"
 import NewDocument from "../views/documents/NewDocument.vue"
 import EditDocument from "../views/documents/EditDocument.vue"
 
+import store from "./../store";
+
 const routes = [
   {
     path: "/",
@@ -231,5 +233,22 @@ const router = createRouter({
   routes,
   linkActiveClass: "active",
 });
+
+router.beforeEach(async (to, from) => {
+  let isAuthenticated = false;
+
+  if(store.state.user_id && store.state.email) {
+    isAuthenticated = true;
+  } else {
+    // todo: read email from localstorage and get the id again?
+  }
+
+  if (
+    !isAuthenticated &&
+    to.name !== 'Signin Basic'
+  ) {
+    return { name: 'Signin Basic' }
+  }
+})
 
 export default router;

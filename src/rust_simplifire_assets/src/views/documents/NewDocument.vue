@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import { rust_simplifire } from "../../../../declarations/rust_simplifire";
 import VmdInput from "components/VmdInput.vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import DocumentService from "../../services/DocumentService";
 
 export default {
     name: "new-project",
@@ -64,9 +64,7 @@ export default {
 
     methods: {
         async addDocument() {
-            const doc_id = await rust_simplifire.add_doc(this.name, this.editorData);
-            await rust_simplifire.add_user_document(doc_id, this.$store.state.user_id, 'author');
-
+            const documentId = await DocumentService.addDocument(this.$store.state.user_id, this.name, this.editorData);
             this.$router.push({ name: "Documents" });
         },
     },

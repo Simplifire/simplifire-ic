@@ -5,7 +5,7 @@
     <div class="card-body">
         
         <p class="card-text">
-            <span class="badge rounded-pill bg-dark">{{ user?.email }}</span>
+            <span class="badge rounded-pill bg-dark">{{ user?.principal_id }}</span>
         </p>
         <a href="#" 
             class="btn btn-primary"

@@ -52,7 +52,8 @@ struct Document {
 #[derive(CandidType, Deserialize, Clone)]
 struct User {
     id: u32,
-    principal_id: u32,
+    principal_id: String,
+    provider_id: String,
     first_name: String,
     last_name: String,
     email: String,

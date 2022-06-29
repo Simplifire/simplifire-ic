@@ -41,8 +41,9 @@
               class="px-0 nav-link font-weight-bold lh-1"
               :class="textWhite ? textWhite : 'text-body'"
             >
-              <span class="badge rounded-pill bg-info">{{ this.$store.state.email }}</span>
+              <span class="badge rounded-pill bg-info">{{ this.$store.state.principal_id }}</span>
             </router-link>
+            
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
@@ -124,12 +125,12 @@ export default {
   },
   components: {
     Breadcrumbs,
-    VmdInput,
+    VmdInput
   },
   computed: {
     currentRouteName() {
       return this.$route.name;
     },
-  },
+  }
 };
 </script>

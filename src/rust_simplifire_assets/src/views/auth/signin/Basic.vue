@@ -50,8 +50,10 @@
                 </p>-->
               </form>
             </div>
-            <ConnectButton></ConnectButton>
-            <ConnectDialog></ConnectDialog>
+            <div class="text-center">
+              <ConnectButton></ConnectButton>
+              <ConnectDialog></ConnectDialog>
+            </div>
           </div>
         </div>
       </div>
@@ -75,7 +77,8 @@
 import { rust_simplifire } from "../../../../../declarations/rust_simplifire";
 import VmdInput from "components/VmdInput.vue";
 import VmdButton from "components/VmdButton.vue";
-import { ConnectButton, ConnectDialog } from "@connect2ic/vue"
+import { ConnectButton, ConnectDialog, useConnect } from "@connect2ic/vue";
+
 
 
 export default {
@@ -104,16 +107,17 @@ export default {
     this.$store.state.showFooter = true;
   },
   async beforeRouteLeave() {
-      if (this.email) {
+      if (this.$store.state.principal_id) {
         const users = await rust_simplifire.get_users([]);
 
-        if (users.some(u => u.email === this.email)) {
-            this.$store.state.user_id = users.find(u => u.email === this.email).id;
+        if (users.some(u => u.principal_id === this.$store.state.principal_id)) {
+            this.$store.state.user_id = users.find(u => u.principal_id === this.$store.state.principal_id).id;
         } else {
-            this.$store.state.user_id = await rust_simplifire.add_user(0, "", "", this.email ?? "");
+            this.$store.state.user_id = await rust_simplifire.add_user(this.$store.state.principal_id, this.$store.state.activeProvider.meta.id, "", "", "");
         }
-        localStorage.user_track = btoa(this.email);
-        this.$store.state.email = this.email;
+
+        /*localStorage.user_track = btoa(this.email);
+        this.$store.state.email = this.email;*/
       } else {
         return false;
       }

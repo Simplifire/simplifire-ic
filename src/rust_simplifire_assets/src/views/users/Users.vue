@@ -18,15 +18,15 @@
                    <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
-                    Email
+                    Principal
                   </th>
-                  <!--
+                  
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
-                    First name
+                    Provider ID
                   </th>
-
+                  <!--
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
@@ -37,7 +37,8 @@
               </thead>
               <tbody>
                 <tr v-for="u in users" :key="u.id">
-                <td class="text-sm font-weight-normal">{{ u.email }}</td>
+                <td class="text-sm font-weight-normal">{{ u.principal_id }}</td>
+                <td class="text-sm font-weight-normal">{{ u.provider_id }}</td>
                   <!--<td class="text-sm font-weight-normal"></td>
                   <td class="text-sm font-weight-normal"></td>-->
                 </tr>

@@ -58,8 +58,9 @@ export default createStore({
           if (all_docs.some(ad => ad.id === d.document_id)) {
             const document = all_docs.find(ad => ad.id === d.document_id);
             const all_user_docs_for_this_document = all_user_docs.filter(a => a.document_id === d.document_id);
-            document.author = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "author")?.user_id)?.email;
-            document.sharedWith = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "counter_party")?.user_id)?.email;
+
+            document.author = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "author")?.user_id)?.principal_id;
+            document.sharedWith = all_users?.find(u => u.id === all_user_docs_for_this_document.find(x => x.role === "counter_party")?.user_id)?.principal_id;
             document.agreed = all_user_docs_for_this_document.every(d => d.agreed) ? "Agreed" : "";
             document.signed = all_user_docs_for_this_document.every(d => d.signed_as) ? "Signed" : "";
             

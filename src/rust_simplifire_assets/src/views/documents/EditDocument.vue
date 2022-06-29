@@ -11,7 +11,7 @@
 
                         <div class="col-lg-8 d-flex align-items-center justify-content-end">
                             <label
-                                >Author: <span class="badge rounded-pill bg-dark">{{ author?.email }}</span></label
+                                >Author: <span class="badge rounded-pill bg-dark">{{ author?.principal_id }}</span></label
                             >
 
                             <button
@@ -27,7 +27,7 @@
 
                             <label v-else
                                 >Shared with:
-                                <span class="badge rounded-pill bg-dark">{{ sharedWith?.email }}</span></label
+                                <span class="badge rounded-pill bg-dark">{{ sharedWith?.principal_id }}</span></label
                             >
 
                             <label v-if="sharedWith && !userIsCurrentEditor && !documentAgreed">

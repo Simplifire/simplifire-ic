@@ -35,12 +35,12 @@ import Configurator from "examples/Configurator.vue";
 import Navbar from "examples/Navbars/Navbar.vue";
 import AppFooter from "examples/Footer.vue";
 import { mapMutations } from "vuex";
-//import * as myCanister from "canisters/myCanister";
+import * as rust_simplifire from "../../declarations/rust_simplifire";
 import { createClient } from "@connect2ic/core";
 import { AstroX } from "@connect2ic/core/providers/astrox";
 import { InternetIdentity } from "@connect2ic/core/providers/internet-identity";
 import { NFID } from "@connect2ic/core/providers/nfid";
-import { Connect2ICProvider, useConnect } from "@connect2ic/vue";
+import { Connect2ICProvider } from "@connect2ic/vue";
 
 import "@connect2ic/core/style.css";
 
@@ -56,14 +56,14 @@ export default {
   data() {
     
     const client = createClient({
-      /*canisters: {
-        counter,
-      },*/
+      canisters: {
+        rust_simplifire,
+      },
   
       host: window.location.origin,
       providers: [
         new AstroX({ dev: true }),
-        new InternetIdentity({ providerUrl: "https://identity.ic0.app" }),
+        new InternetIdentity({ dev: true, providerUrl: "https://identity.ic0.app" }),
         new NFID()
       ],
       globalProviderConfig: {
@@ -71,29 +71,32 @@ export default {
         // Should be enabled while developing locally & disabled in production
         dev: true,
         // The host
-        host: "https://localhost:8000",
+        host: "http://127.0.0.1:8000",
         // Certain providers require specifying an app name
         appName: "rust_simplifire",
         // Certain providers require specifying which canisters are whitelisted
         // Array<string>
-        whitelist: ["ryjl3-tyaaa-aaaaa-aaaba-cai"],
+        whitelist: ["rrkah-fqaaa-aaaaa-aaaaq-cai"],
         // Certain providers allow you to specify a canisterId for the Ledger canister
         // For example when running it locally
-        ledgerCanisterId: "ryjl3-tyaaa-aaaaa-aaaba-cai",
+        ledgerCanisterId: "rrkah-fqaaa-aaaaa-aaaaq-cai",
         // Certain providers allow you to specify a host for the Ledger canister
         // For example when running it locally
-        ledgerHost: "https://localhost:8000"
+        ledgerHost: "http://127.0.0.1:8000"
       },
     });
+    this.$store.state.connectClient = client;
     client.on("connect", () => {
-      // Connected  
-      console.log('connected');
-      console.log(client.activeProvider);
-      console.log(client.principal);
+      this.$store.state.provider_id = client.activeProvider.meta.id;
+      this.$store.state.principal_id = client.principal;
+      this.$router.push({ name: 'Dashboard'});
     });
-    return {
-      client: client,
-    };
+    client.on('disconnect', () => {
+      console.log('disconnected from the client');
+    });
+      return {
+        client: client,
+      };
     },
   methods: {
     ...mapMutations(["toggleConfigurator", "navbarMinimize"]),

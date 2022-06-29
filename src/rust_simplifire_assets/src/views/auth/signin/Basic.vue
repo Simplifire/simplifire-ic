@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
               <form role="form" class="text-start mt-3">
-                <div class="mb-3">
+                <!--<div class="mb-3">
                   <vmd-input
                     type="email"
                     label="Email"
@@ -25,10 +25,10 @@
                     v-model="email"
                   />
                 </div>
-                <!--<div class="mb-3">
+                <div class="mb-3">
                   <vmd-input type="password" label="Password" name="password" />
-                </div>-->
-                <!--<vmd-switch id="rememberMe">Remember me</vmd-switch>-->
+                </div>
+                <vmd-switch id="rememberMe">Remember me</vmd-switch>
                 <div class="text-center">
                   <router-link :to="{ name: 'Dashboard' }">
                     <vmd-button
@@ -39,7 +39,7 @@
                       >Sign in</vmd-button
                     >
                   </router-link>
-                </div>
+                </div>-->
                 <!--<p class="mt-4 text-sm text-center">
                   Don't have an account?
                   <a

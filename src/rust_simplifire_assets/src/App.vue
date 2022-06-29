@@ -1,4 +1,7 @@
 <template>
+<Connect2ICProvider
+  :client="client">
+
   <sidenav
     :custom_class="this.$store.state.mcolor"
     :class="[this.$store.state.isRTL ? 'fixed-end' : 'fixed-start']"
@@ -24,6 +27,7 @@
       ]"
     /> -->
   </main>
+  </Connect2ICProvider>
 </template>
 <script>
 import Sidenav from "./examples/Sidenav/Sidenav.vue";
@@ -31,6 +35,14 @@ import Configurator from "examples/Configurator.vue";
 import Navbar from "examples/Navbars/Navbar.vue";
 import AppFooter from "examples/Footer.vue";
 import { mapMutations } from "vuex";
+//import * as myCanister from "canisters/myCanister";
+import { createClient } from "@connect2ic/core";
+import { AstroX } from "@connect2ic/core/providers/astrox";
+import { InternetIdentity } from "@connect2ic/core/providers/internet-identity";
+import { NFID } from "@connect2ic/core/providers/nfid";
+import { Connect2ICProvider, useConnect } from "@connect2ic/vue";
+
+import "@connect2ic/core/style.css";
 
 export default {
   name: "App",
@@ -39,7 +51,50 @@ export default {
     Configurator,
     Navbar,
     AppFooter,
+    Connect2ICProvider
   },
+  data() {
+    
+    const client = createClient({
+      /*canisters: {
+        counter,
+      },*/
+  
+      host: window.location.origin,
+      providers: [
+        new AstroX({ dev: true }),
+        new InternetIdentity({ providerUrl: "https://identity.ic0.app" }),
+        new NFID()
+      ],
+      globalProviderConfig: {
+        // Determines whether root key is fetched
+        // Should be enabled while developing locally & disabled in production
+        dev: true,
+        // The host
+        host: "https://localhost:8000",
+        // Certain providers require specifying an app name
+        appName: "rust_simplifire",
+        // Certain providers require specifying which canisters are whitelisted
+        // Array<string>
+        whitelist: ["ryjl3-tyaaa-aaaaa-aaaba-cai"],
+        // Certain providers allow you to specify a canisterId for the Ledger canister
+        // For example when running it locally
+        ledgerCanisterId: "ryjl3-tyaaa-aaaaa-aaaba-cai",
+        // Certain providers allow you to specify a host for the Ledger canister
+        // For example when running it locally
+        ledgerHost: "https://localhost:8000"
+      },
+    });
+    client.on("connect", () => {
+      // Connected  
+      console.log('connected');
+      console.log(client.activeProvider);
+      console.log(client.principal);
+    });
+    return {
+      client: client,
+    };
+    },
   methods: {
     ...mapMutations(["toggleConfigurator", "navbarMinimize"]),
   },
@@ -53,6 +108,7 @@ export default {
         "px-0 mx-4 mt-4": !this.$store.state.isAbsolute,
       };
     },
+
   },
   beforeMount() {
     this.$store.state.isTransparent = "bg-transparent";
@@ -62,6 +118,8 @@ export default {
     if (window.innerWidth > 1200) {
       sidenav.classList.add("g-sidenav-pinned");
     }
+
   },
+
 };
 </script>

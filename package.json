@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-vue": "^4.0.1",
+    "@connect2ic/core": "^0.1.6",
+    "@connect2ic/vue": "^0.1.1",
     "@dfinity/agent": "0.10.3",
     "@dfinity/candid": "0.10.3",
     "@dfinity/principal": "0.10.3",

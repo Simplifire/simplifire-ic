@@ -50,6 +50,8 @@
                 </p>-->
               </form>
             </div>
+            <ConnectButton></ConnectButton>
+            <ConnectDialog></ConnectDialog>
           </div>
         </div>
       </div>
@@ -73,12 +75,16 @@
 import { rust_simplifire } from "../../../../../declarations/rust_simplifire";
 import VmdInput from "components/VmdInput.vue";
 import VmdButton from "components/VmdButton.vue";
+import { ConnectButton, ConnectDialog } from "@connect2ic/vue"
+
 
 export default {
   name: "signin-basic",
   components: {
     VmdInput,
     VmdButton,
+    ConnectButton,
+    ConnectDialog,
   },
   data() {
     return {

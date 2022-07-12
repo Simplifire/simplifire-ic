@@ -40,13 +40,14 @@
             This is how others will learn about the project, so make it good!
           </p> -->
                     <div id="editor">
-                        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" :disabled="!userIsCurrentEditor"></ckeditor>
                     </div>
                     <div class="mt-4 d-flex justify-content-end">
                         <router-link :to="{ name: 'Documents' }">
                             <a type="button" name="button" class="m-0 btn btn-light">Cancel</a>
                         </router-link>
                         <button
+                            v-if="userIsCurrentEditor"
                             type="button"
                             name="button"
                             class="m-0 btn bg-gradient-success ms-2"
@@ -108,6 +109,7 @@ export default {
             users: [],
             author: null,
             sharedWith: null,
+            userIsCurrentEditor: false
         };
     },
     components: {
@@ -128,6 +130,14 @@ export default {
                 this.editorData = this.editedDocument.content;
             } else {
                 console.error("Document not found");
+            }
+
+            if(this.$store.state.user_id == documentToEdit.current_editor_id) {
+                console.log('I am editor');
+                this.userIsCurrentEditor = true;
+            } else {
+                console.log('I am NOT editor');
+                this.userIsCurrentEditor = false;
             }
 
             const allDocVersions = await DocumentService.getAllDocumentVersions(this.editedDocument.id);

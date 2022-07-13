@@ -34,8 +34,12 @@ export default {
     async shareDocumentWithUser(documentId, documentName, sharedUserId) {
         await rust_simplifire.add_user_document(documentId, sharedUserId, "counter_party");
         await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
-        const new_version_id = await this.saveDocumentChanges(sharedUserId);
     },
+
+    // async shareDocumentBack(documentId, documentName, sharedUserId) {
+    //     await this.saveDocumentChanges(documentId, sharedUserId, documentContent);
+    //     // await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
+    // },
 
     async saveDocumentChanges(documentId, target_user_id, documentContent) {
         const all_document_versions = await this.getAllDocumentVersions(documentId);

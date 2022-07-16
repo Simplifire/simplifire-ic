@@ -92,7 +92,9 @@ export default {
       this.$router.push({ name: 'Dashboard'});
     });
     client.on('disconnect', () => {
-      console.log('disconnected from the client');
+      this.$store.state.provider_id = null;
+      this.$store.state.principal_id = null;
+      this.$router.push({ name: 'Signin Basic'});
     });
       return {
         client: client,

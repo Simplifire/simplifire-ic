@@ -36,19 +36,15 @@ export default {
         await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
     },
 
-    // async shareDocumentBack(documentId, documentName, sharedUserId) {
-    //     await this.saveDocumentChanges(documentId, sharedUserId, documentContent);
-    //     // await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
-    // },
-
-    async saveDocumentChanges(documentId, target_user_id, documentContent) {
+    async saveDocumentChanges(documentId, target_user_id, documentContent, documentName) {
         const all_document_versions = await this.getAllDocumentVersions(documentId);
 
-        return await rust_simplifire.add_document_version(
+        await rust_simplifire.add_document_version(
             documentId,
             all_document_versions.length + 1,
             target_user_id,
             documentContent
         );
+        await rust_simplifire.update_doc(documentId, target_user_id, documentName);
     },
 }

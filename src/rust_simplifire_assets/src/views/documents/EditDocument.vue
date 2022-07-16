@@ -143,7 +143,10 @@ export default {
                 console.error("Document not found");
             }
 
-            if(this.$store.state.user_id == documentToEdit.editor_user_id) {
+            console.log(typeof this.$store.state.user_id);
+            console.log(typeof documentToEdit.current_editor_id);
+            console.log('current user id: ' + this.$store.state.user_id);
+            if(this.$store.state.user_id == documentToEdit.current_editor_id) {
                 console.log('I am editor');
                 this.userIsCurrentEditor = true;
             } else {
@@ -178,7 +181,7 @@ export default {
             }
         },
         async updateDocument() {
-            await this.saveDocumentChanges(this.$store.state.user_id);
+            await this.saveDocumentChanges(this.$store.state.user_id, this.$store.state.user_id, this.editorData, this.editedDocument.name);
             this.$router.push({ name: "Documents" });
         },
         async shareDocument(userId) {
@@ -196,18 +199,19 @@ export default {
             if(this.$store.state.user_id == this.sharedWith.id) {
                 console.log('I am participant');
                 console.log('Sending: ' + this.author.id);
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.author.id, this.editorData);
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.author.id, this.editorData, this.editedDocument.name);
+                
             } else {
                 console.log('I am author');
                 console.log('Sending: ' + this.sharedWith.id);
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.sharedWith.id, this.editorData);
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.sharedWith.id, this.editorData, this.editedDocument.name);
             }
 
             this.$router.push({ name: "Documents" });
         },
 
         async saveDocumentChanges(target_user_id) {
-            await DocumentService.saveDocumentChanges(this.editedDocument.id, target_user_id, this.editorData);
+            await DocumentService.saveDocumentChanges(this.editedDocument.id, target_user_id, this.editorData, this.editedDocument.name);
         },
     },
 };

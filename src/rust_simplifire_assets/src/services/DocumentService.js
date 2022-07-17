@@ -18,6 +18,10 @@ export default {
         return (await rust_simplifire.get_document_versions([]) || []).filter(v => v.document_id == documentId);
     },
 
+    async getThisUserDoc(documentId, userId) {
+        return (await rust_simplifire.get_user_documents([]) || []).filter(v => v.document_id == documentId && v.user_id == userId);
+    },
+
     async addDocument(userId, documentName, content) {
         const documentId = await rust_simplifire.add_doc(userId, documentName);
         await rust_simplifire.add_user_document(documentId, userId, 'author');
@@ -31,12 +35,16 @@ export default {
         return all_user_docs.filter((a) => a.document_id == documentId);
     },
 
-    async shareDocumentWithUser(documentId, documentName, sharedUserId) {
+    async shareDocumentWithUser(documentId, sharedUserId) {
         await rust_simplifire.add_user_document(documentId, sharedUserId, "counter_party");
-        await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
+        await rust_simplifire.update_doc(documentId, sharedUserId);
     },
 
-    async saveDocumentChanges(documentId, target_user_id, documentContent, documentName) {
+    async acceptDocument(documentId, userId) {
+
+    },
+
+    async saveDocumentChanges(documentId, current_user_id, target_user_id, documentContent) {
         const all_document_versions = await this.getAllDocumentVersions(documentId);
 
         await rust_simplifire.add_document_version(
@@ -45,6 +53,12 @@ export default {
             target_user_id,
             documentContent
         );
-        await rust_simplifire.update_doc(documentId, target_user_id, documentName);
+        await rust_simplifire.update_doc(documentId, target_user_id);
+        const userDoc = await this.getThisUserDoc(documentId, current_user_id);
+        console.log(userDoc);
+        /*await rust_simplifire.update_user_doc(
+
+            update_user_doc_impl(id: u32, document_id: u32, user_id: u32, role: String, can_edit: bool, signed: bool
+        )*/
     },
 }

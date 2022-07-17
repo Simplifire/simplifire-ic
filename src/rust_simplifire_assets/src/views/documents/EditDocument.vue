@@ -30,9 +30,19 @@
                                 type="button"
                                 name="button"
                                 class="m-2 btn bg-gradient-primary ms-2"
-                                @click="shareBackDocument()"
+                                @click="proposeChangesToDocument()"
                             >
-                                Share back
+                                Propose changes
+                            </button>
+
+                            <button
+                                v-if="sharedWith && userIsCurrentEditor"
+                                type="button"
+                                name="button"
+                                class="m-2 btn bg-gradient-info ms-2"
+                                @click="acceptDocument()"
+                            >
+                                Agree
                             </button>
 
                             <label v-else
@@ -134,8 +144,6 @@ export default {
     methods: {
         async loadDocument() {
             const documentToEdit = await DocumentService.getDocumentById(this.$route.params.id);
-            console.log('load ' + documentToEdit);
-            console.log(documentToEdit);
             if (documentToEdit) {
                 this.editedDocument = documentToEdit;
                 this.editorData = this.editedDocument.content;
@@ -143,19 +151,13 @@ export default {
                 console.error("Document not found");
             }
 
-            console.log(typeof this.$store.state.user_id);
-            console.log(typeof documentToEdit.current_editor_id);
-            console.log('current user id: ' + this.$store.state.user_id);
             if(this.$store.state.user_id == documentToEdit.current_editor_id) {
-                console.log('I am editor');
                 this.userIsCurrentEditor = true;
             } else {
-                console.log('I am NOT editor');
                 this.userIsCurrentEditor = false;
             }
 
             const allDocVersions = await DocumentService.getAllDocumentVersions(this.editedDocument.id);
-            console.log(allDocVersions);
             allDocVersions.sort(function compareFn(a, b) {
                 return b.version_number - a.version_number;
             });
@@ -165,7 +167,6 @@ export default {
             if (!this.latestVersion) {
                 console.error("Missing version");
             }
-            console.log(this.latestVersion);
 
             this.editorData = this.latestVersion.content;
 
@@ -181,37 +182,31 @@ export default {
             }
         },
         async updateDocument() {
-            await this.saveDocumentChanges(this.$store.state.user_id, this.$store.state.user_id, this.editorData, this.editedDocument.name);
+            await this.saveDocumentChanges(this.$store.state.user_id);
             this.$router.push({ name: "Documents" });
         },
         async shareDocument(userId) {
-            console.log('Share with: ' + userId);
-            await DocumentService.shareDocumentWithUser(this.editedDocument.id, this.editedDocument.name, userId);
+            await DocumentService.shareDocumentWithUser(this.editedDocument.id, userId);
 
             this.sharedWith = this.users.find((u) => u.id === userId);
             this.$router.push({ name: "Documents" });
         },
-        async shareBackDocument() {
-            console.log('Current user id: ' + this.$store.state.user_id);
-            console.log(this.sharedWith);
-            console.log(this.author);
-            console.log(this.editedDocument);
+        async proposeChangesToDocument() {
+
             if(this.$store.state.user_id == this.sharedWith.id) {
-                console.log('I am participant');
-                console.log('Sending: ' + this.author.id);
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.author.id, this.editorData, this.editedDocument.name);
-                
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, this.author.id, this.editorData);
             } else {
-                console.log('I am author');
-                console.log('Sending: ' + this.sharedWith.id);
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.sharedWith.id, this.editorData, this.editedDocument.name);
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, this.sharedWith.id, this.editorData);
             }
 
             this.$router.push({ name: "Documents" });
         },
+        async acceptDocument() {
+            await DocumentService.acceptDocument(this.editedDocument.id, this.$store.state.user_id);
+        },
 
         async saveDocumentChanges(target_user_id) {
-            await DocumentService.saveDocumentChanges(this.editedDocument.id, target_user_id, this.editorData, this.editedDocument.name);
+            await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, target_user_id, this.editorData);
         },
     },
 };

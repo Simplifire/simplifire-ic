@@ -68,7 +68,6 @@ export default {
   },
   watch: {
     inputValue(newValue) {
-      console.log('changing');
       if (newValue === this.modelValue) {
         return;
       }

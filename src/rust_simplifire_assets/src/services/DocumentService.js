@@ -18,6 +18,10 @@ export default {
         return (await rust_simplifire.get_document_versions([]) || []).filter(v => v.document_id == documentId);
     },
 
+    async getThisUserDoc(documentId, userId) {
+        return (await rust_simplifire.get_user_documents([]) || []).filter(v => v.document_id == documentId && v.user_id == userId);
+    },
+
     async addDocument(userId, documentName, content) {
         const documentId = await rust_simplifire.add_doc(userId, documentName);
         await rust_simplifire.add_user_document(documentId, userId, 'author');
@@ -31,20 +35,52 @@ export default {
         return all_user_docs.filter((a) => a.document_id == documentId);
     },
 
-    async shareDocumentWithUser(documentId, documentName, sharedUserId) {
+    async shareDocumentWithUser(documentId, sharedUserId) {
         await rust_simplifire.add_user_document(documentId, sharedUserId, "counter_party");
-        await rust_simplifire.update_doc(documentId, sharedUserId, documentName);
-        const new_version_id = await this.saveDocumentChanges(sharedUserId);
+        await rust_simplifire.change_current_doc_editor(documentId, sharedUserId);
+    },
+
+    async acceptDocument(documentId, userId) {
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.accept_user_document(userDoc.id);
+        }
+    },
+
+    async revertEveryAcceptance(documentId) {
+        const userDocs = await this.getDocumentUsers(documentId);
+        userDocs.forEach(async du => {
+            await rust_simplifire.revert_user_document_acceptance(du.id);
+        })
+    },
+
+    async revertAcceptance(documentId, userId) {
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.revert_user_document_acceptance(userDoc.id);
+        }
+    },
+
+    async signDocument(documentId, userId, signedAs, signedOnBehalfOf) {
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.sign_user_document(userDoc.id, signedAs, signedOnBehalfOf);
+        }
     },
 
     async saveDocumentChanges(documentId, target_user_id, documentContent) {
         const all_document_versions = await this.getAllDocumentVersions(documentId);
 
-        return await rust_simplifire.add_document_version(
+        await rust_simplifire.add_document_version(
             documentId,
             all_document_versions.length + 1,
             target_user_id,
             documentContent
         );
+        await rust_simplifire.change_current_doc_editor(documentId, target_user_id);
+        
     },
 }

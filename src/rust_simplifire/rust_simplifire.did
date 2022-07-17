@@ -31,7 +31,9 @@ type UserDocument =
         user_id: nat32;
         role: text;
         can_edit: bool;
-        signed: bool;
+        agreed: bool;
+        signed_as: text;
+        signed_on_behalf_of: text;
         active: bool;
         added: TimestampMillis; 
         updated: TimestampMillis;
@@ -57,7 +59,7 @@ service: {
     add_doc: (current_editor_id: nat32, name: text) -> (id: nat32);     
     get_docs: (opt bool) -> (vec Document) query;
     get_doc: (id: nat32) -> (opt Document) query;
-    update_doc: (id: nat32, current_editor_id: nat32, name: text) -> (bool);
+    change_current_doc_editor: (id: nat32, current_editor_id: nat32) -> (bool);
 
     add_user: (principal_id: nat32, first_name: text, last_name: text, email: text) -> (nat32); 
     get_users: (opt bool) -> (vec User) query;
@@ -66,13 +68,14 @@ service: {
 
     add_user_document: (document_id: nat32, user_id: nat32, role: text) -> (id: nat32);
     get_user_documents: (opt bool) -> (vec UserDocument) query;
-    update_user_doc: (id: nat32, document_id: nat32, user_id: nat32, text, can_edit: bool) -> ();
+    accept_user_document: (id: nat32) -> ();
+    revert_user_document_acceptance: (id: nat32) -> ();
+    sign_user_document: (id: nat32, signed_as: text, signed_on_behalf_of: text) -> ();
 
     add_document_version: (document_id: nat32, version_number: nat32, editor_user_id: nat32, content: text) -> (id: nat32);  
     get_document_versions: (opt bool) -> (vec DocumentVersion) query;
     get_document_version: (id: nat32) -> (DocumentVersion) query;
-    update_document_version: (id: nat32, content: text) -> (); 
-
+    update_document_version: (id: nat32, content: text) -> ();
 }
 
 

@@ -102,16 +102,13 @@ export default {
     nextStep() {
       if (this.activeStep < this.formSteps) {
         this.activeStep += 1;
-        console.log(this.activeStep);
       } else {
         this.activeStep -= 1;
-        console.log(this.activeStep);
       }
     },
     prevStep() {
       if (this.activeStep > 0) {
         this.activeStep -= 1;
-        console.log(this.activeStep);
       }
     },
   },

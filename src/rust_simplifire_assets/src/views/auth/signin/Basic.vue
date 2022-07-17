@@ -106,7 +106,6 @@ export default {
         } else {
             this.$store.state.user_id = await rust_simplifire.add_user(0, "", "", this.email ?? "");
         }
-
         localStorage.user_track = btoa(this.email);
         this.$store.state.email = this.email;
       } else {

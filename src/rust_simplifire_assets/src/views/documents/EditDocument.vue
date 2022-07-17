@@ -62,7 +62,8 @@
                                 type="button"
                                 name="button"
                                 class="m-2 btn bg-gradient-success ms-2"
-                                @click="signDocument()"
+                                data-bs-toggle="modal"
+                                data-bs-target="#signModal"   
                             >
                                 Sign
                             </button>
@@ -107,11 +108,11 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Share with</h5>
+                    <h5 class="modal-title" id="shareModalLabel">Share with</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -129,6 +130,36 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signModal" tabindex="-1" aria-labelledby="signModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signModalLabel">Sign document</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <vmd-input
+                        class="form-control"
+                        label="Signed as"
+                        id="signedAs"
+                        variant="dynamic"
+                        v-model="signedAs"
+                    />
+                    <vmd-input
+                        class="form-control"
+                        label="Signed on behalf of"
+                        id="signedAs"
+                        variant="dynamic"
+                        v-model="signedOnBehalfOf"
+                    />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="signDocument(signedAs, signedOnBehalfOf)">Sign</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -161,6 +192,8 @@ export default {
             documentSigned: false,
             documentSignedBothParties: false,
             editorDisabled: false,
+            signedAs: "",
+            signedOnBehalfOf: ""
         };
     },
     components: {
@@ -260,8 +293,15 @@ export default {
             await DocumentService.acceptDocument(this.editedDocument.id, this.$store.state.user_id);
             this.$router.push({ name: "Documents" });
         },
-        async signDocument() {
-            await DocumentService.signDocument(this.editedDocument.id, this.$store.state.user_id, "Michal", "Codeclusive");
+        async signDocument(signedAs, signedOnBehalfOf) {
+
+            const appendText = `<hr><p>Signed as ${signedAs} on behalf of ${signedOnBehalfOf}</p>`;
+            if(this.$store.state.user_id == this.sharedWith.id) {
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.author.id, this.editorData + appendText);
+            } else {
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.sharedWith.id, this.editorData + appendText);
+            }
+            await DocumentService.signDocument(this.editedDocument.id, this.$store.state.user_id, signedAs, signedOnBehalfOf);
             this.$router.push({ name: "Documents" });
         },
     },

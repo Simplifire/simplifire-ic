@@ -170,17 +170,47 @@
 <script>
 import UserCard from "components/UserCard.vue";
 import VmdInput from "components/VmdInput.vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Editor from "../../../assets/js/ckeditor";
 import DocumentService from "../../services/DocumentService";
 
 export default {
     name: "new-project",
     data() {
         return {
-            editor: ClassicEditor,
+            editor: Editor,
             editorData: "<p></p>",
             editorConfig: {
-                toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "blockQuote"],
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'blockQuote',
+                        'insertTable',
+                        'undo',
+                        'redo',
+                        '|',
+                        'exportPdf'
+                    ]
+	            },
+                exportPdf: {
+                    fileName: 'simplifire-demo-document.pdf',
+                    converterOptions: {
+                        format: 'Tabloid',
+                        margin_top: '20mm',
+                        margin_bottom: '20mm',
+                        margin_right: '24mm',
+                        margin_left: '24mm',
+                        page_orientation: 'portrait'
+                    },
+                    // PROVIDE CORRECT VALUES HERE:
+                    tokenUrl: ''
+                },
             },
             editedDocument: {},
             latestVersion: {},

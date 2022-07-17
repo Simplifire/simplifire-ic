@@ -50,7 +50,6 @@ export default {
   mounted() {
     let myDropzone = new Dropzone("#productImg");
     myDropzone.on("addedfile", (file) => {
-      console.log(`File added: ${file.name}`);
     });
   },
 };

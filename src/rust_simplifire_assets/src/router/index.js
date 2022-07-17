@@ -243,6 +243,7 @@ router.beforeEach(async (to, from) => {
     // todo: read email from localstorage and get the id again?
   }
 
+  
   if (
     !isAuthenticated &&
     to.name !== 'Signin Basic'

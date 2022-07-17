@@ -48,6 +48,13 @@ export default {
         }
     },
 
+    async revertEveryAcceptance(documentId) {
+        const userDocs = await this.getDocumentUsers(documentId);
+        userDocs.forEach(async du => {
+            await rust_simplifire.revert_user_document_acceptance(du.id);
+        })
+    },
+
     async revertAcceptance(documentId, userId) {
         const userDocA = await this.getThisUserDoc(documentId, userId);
         if (userDocA && userDocA.length === 1) {

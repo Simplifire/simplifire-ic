@@ -37,14 +37,34 @@ export default {
 
     async shareDocumentWithUser(documentId, sharedUserId) {
         await rust_simplifire.add_user_document(documentId, sharedUserId, "counter_party");
-        await rust_simplifire.update_doc(documentId, sharedUserId);
+        await rust_simplifire.change_current_doc_editor(documentId, sharedUserId);
     },
 
     async acceptDocument(documentId, userId) {
-
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.accept_user_document(userDoc.id);
+        }
     },
 
-    async saveDocumentChanges(documentId, current_user_id, target_user_id, documentContent) {
+    async revertAcceptance(documentId, userId) {
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.revert_user_document_acceptance(userDoc.id);
+        }
+    },
+
+    async signDocument(documentId, userId, signedAs, signedOnBehalfOf) {
+        const userDocA = await this.getThisUserDoc(documentId, userId);
+        if (userDocA && userDocA.length === 1) {
+            const userDoc = userDocA[0];
+            await rust_simplifire.sign_user_document(userDoc.id, signedAs, signedOnBehalfOf);
+        }
+    },
+
+    async saveDocumentChanges(documentId, target_user_id, documentContent) {
         const all_document_versions = await this.getAllDocumentVersions(documentId);
 
         await rust_simplifire.add_document_version(
@@ -53,12 +73,7 @@ export default {
             target_user_id,
             documentContent
         );
-        await rust_simplifire.update_doc(documentId, target_user_id);
-        const userDoc = await this.getThisUserDoc(documentId, current_user_id);
-        console.log(userDoc);
-        /*await rust_simplifire.update_user_doc(
-
-            update_user_doc_impl(id: u32, document_id: u32, user_id: u32, role: String, can_edit: bool, signed: bool
-        )*/
+        await rust_simplifire.change_current_doc_editor(documentId, target_user_id);
+        
     },
 }

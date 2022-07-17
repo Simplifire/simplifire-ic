@@ -30,6 +30,14 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Shared with
                                     </th>
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Agreed
+                                    </th>
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Signed
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,6 +48,20 @@
                                     <td class="text-sm font-weight-normal">{{ formatDate(doc.added) }}</td>
                                     <td class="text-sm font-weight-normal"><span class="badge rounded-pill bg-dark">{{ doc.author }}</span></td>
                                     <td class="text-sm font-weight-normal"><span class="badge rounded-pill bg-dark">{{ doc.sharedWith }}</span></td>
+                                    <td class="text-sm font-weight-normal">
+                                        <span 
+                                            v-if="doc.agreed"
+                                            class="badge rounded-pill bg-info" >
+                                                {{ doc.agreed }}
+                                        </span>
+                                    </td>
+                                    <td class="text-sm font-weight-normal">
+                                        <span 
+                                            v-if="doc.agreed"
+                                            class="badge rounded-pill bg-success">
+                                                {{ doc.signed }}
+                                        </span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -41,12 +41,11 @@ fn get_doc_impl(doc_id: u32, runtime_state: &RuntimeState) -> Option<Document> {
 }
 
 #[update]
-fn update_doc(id: u32, current_editor_id: u32) -> bool {
-    RUNTIME_STATE.with(|state| update_doc_impl(id, current_editor_id, &mut state.borrow_mut()))
+fn change_current_doc_editor(id: u32, current_editor_id: u32) -> bool {
+    RUNTIME_STATE.with(|state| change_current_doc_editor_impl(id, current_editor_id, &mut state.borrow_mut()))
 }
-fn update_doc_impl(id: u32, current_editor_id: u32, runtime_state: &mut RuntimeState) -> bool {
+fn change_current_doc_editor_impl(id: u32, current_editor_id: u32, runtime_state: &mut RuntimeState) -> bool {
     if let Some(document) = runtime_state.data.documents.iter_mut().find(|i| i.id == id) {
-        document.active = true;
         document.current_editor_id = current_editor_id;
         true
     } else {

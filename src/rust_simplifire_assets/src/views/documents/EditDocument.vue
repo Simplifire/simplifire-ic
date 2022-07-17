@@ -26,7 +26,7 @@
                             </button>
 
                             <button
-                                v-if="sharedWith && userIsCurrentEditor"
+                                v-if="sharedWith && userIsCurrentEditor && !documentAgreed"
                                 type="button"
                                 name="button"
                                 class="m-2 btn bg-gradient-primary ms-2"
@@ -36,13 +36,23 @@
                             </button>
 
                             <button
-                                v-if="sharedWith && userIsCurrentEditor"
+                                v-if="sharedWith && userIsCurrentEditor && !documentAgreed"
                                 type="button"
                                 name="button"
                                 class="m-2 btn bg-gradient-info ms-2"
                                 @click="acceptDocument()"
                             >
                                 Agree
+                            </button>
+
+                            <button
+                                v-if="sharedWith && documentAgreed && !documentSigned"
+                                type="button"
+                                name="button"
+                                class="m-2 btn bg-gradient-success ms-2"
+                                @click="signDocument()"
+                            >
+                                Sign
                             </button>
 
                             <label v-else
@@ -67,7 +77,7 @@
                             <a type="button" name="button" class="m-0 btn btn-light">Cancel</a>
                         </router-link>
                         <button
-                            v-if="userIsCurrentEditor"
+                            v-if="userIsCurrentEditor && !documentAgreed"
                             type="button"
                             name="button"
                             class="m-0 btn bg-gradient-success ms-2"
@@ -129,7 +139,9 @@ export default {
             users: [],
             author: null,
             sharedWith: null,
-            userIsCurrentEditor: false
+            userIsCurrentEditor: false,
+            documentAgreed: false,
+            documentSigned: false,
         };
     },
     components: {
@@ -175,6 +187,15 @@ export default {
                 const author_user_doc = this_doc_user_docs.find((d) => d.role === "author");
                 const counter_party = this_doc_user_docs.find((d) => d.role === "counter_party");
 
+                if (author_user_doc.agreed && counter_party.agreed) {
+                    this.documentAgreed = true;
+                }
+                if ((author_user_doc.user_id === this.$store.state.user_id) && author_user_doc.signed_as) {
+                    this.documentSigned = true;
+                } else if ((counter_party.user_id === this.$store.state.user_id) && counter_party.signed_as) {
+                    this.documentSigned = true;
+                }
+
                 this.author = this.users.find((u) => u.id === author_user_doc?.user_id);
                 this.sharedWith = this.users.find((u) => u.id === counter_party?.user_id);
             } else {
@@ -182,7 +203,7 @@ export default {
             }
         },
         async updateDocument() {
-            await this.saveDocumentChanges(this.$store.state.user_id);
+            await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, this.editorData);
             this.$router.push({ name: "Documents" });
         },
         async shareDocument(userId) {
@@ -194,19 +215,21 @@ export default {
         async proposeChangesToDocument() {
 
             if(this.$store.state.user_id == this.sharedWith.id) {
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, this.author.id, this.editorData);
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.author.id, this.editorData);
             } else {
-                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, this.sharedWith.id, this.editorData);
+                await DocumentService.saveDocumentChanges(this.editedDocument.id, this.sharedWith.id, this.editorData);
             }
-
+            await DocumentService.revertAcceptance(this.editedDocument.id, this.$store.state.user_id);
             this.$router.push({ name: "Documents" });
         },
         async acceptDocument() {
+            await this.proposeChangesToDocument();
             await DocumentService.acceptDocument(this.editedDocument.id, this.$store.state.user_id);
+            this.$router.push({ name: "Documents" });
         },
-
-        async saveDocumentChanges(target_user_id) {
-            await DocumentService.saveDocumentChanges(this.editedDocument.id, this.$store.state.user_id, target_user_id, this.editorData);
+        async signDocument() {
+            await DocumentService.signDocument(this.editedDocument.id, this.$store.state.user_id, "Michal", "Codeclusive");
+            this.$router.push({ name: "Documents" });
         },
     },
 };

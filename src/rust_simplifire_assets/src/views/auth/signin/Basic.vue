@@ -113,7 +113,7 @@ export default {
         if (users.some(u => u.principal_id === this.$store.state.principal_id)) {
             this.$store.state.user_id = users.find(u => u.principal_id === this.$store.state.principal_id).id;
         } else {
-            this.$store.state.user_id = await rust_simplifire.add_user(this.$store.state.principal_id, this.$store.state.activeProvider.meta.id, "", "", "");
+            this.$store.state.user_id = await rust_simplifire.add_user(this.$store.state.principal_id, this.$store.state.provider_id, "", "", "");
         }
 
         /*localStorage.user_track = btoa(this.email);

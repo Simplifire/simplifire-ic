@@ -42,25 +42,41 @@
 
 <script>
 import VmdInput from "components/VmdInput.vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DocumentService from "../../services/DocumentService";
+import Editor from "../../../assets/js/ckeditor";
 
 export default {
     name: "new-project",
     data() {
         return {
             name: "",
-            editor: ClassicEditor,
+            editor: Editor,
             editorData: "<p></p>",
             editorConfig: {
-                toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "blockQuote"],
-            },
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'blockQuote',
+                        'insertTable',
+                        'undo',
+                        'redo',
+                    ]
+	            },
+            }
         };
     },
     components: {
         VmdInput,
     },
-    mounted() {},
+    mounted() {
+    },
 
     methods: {
         async addDocument() {

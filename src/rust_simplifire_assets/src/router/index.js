@@ -32,10 +32,11 @@ import Illustration from "../views/auth/signin/Illustration.vue";
 import ResetCover from "../views/auth/reset/Cover.vue";
 import SignupCover from "../views/auth/signup/Cover.vue";
 
-import Users from "../views/users/Users.vue"
-import Documents from "../views/documents/Documents.vue"
-import NewDocument from "../views/documents/NewDocument.vue"
-import EditDocument from "../views/documents/EditDocument.vue"
+import Users from "../views/users/Users.vue";
+import Documents from "../views/documents/Documents.vue";
+import NewDocument from "../views/documents/NewDocument.vue";
+import EditDocument from "../views/documents/EditDocument.vue";
+import Profile from "../views/pages/profile/Profile.vue";
 
 import { useConnect } from "@connect2ic/vue";
 
@@ -71,6 +72,11 @@ const routes = [
     path: "/users",
     name: "Users",
     component: Users
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   },
   /////////
   {

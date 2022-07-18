@@ -15,6 +15,7 @@
       :class="[navClasses]"
       :textWhite="this.$store.state.isAbsolute ? 'text-white opacity-8' : ''"
       :minNav="navbarMinimize"
+      :key="this.$store.state.navbarComponentKey"
       v-if="this.$store.state.showNavbar"
     />
     <router-view />
@@ -39,8 +40,12 @@ import * as rust_simplifire from "../../declarations/rust_simplifire";
 import { createClient } from "@connect2ic/core";
 import { AstroX } from "@connect2ic/core/providers/astrox";
 import { InternetIdentity } from "@connect2ic/core/providers/internet-identity";
+import { InfinityWallet } from "@connect2ic/core/providers/infinity-wallet";
 import { NFID } from "@connect2ic/core/providers/nfid";
+import { PlugWallet } from "@connect2ic/core/providers/plug-wallet";
+import { StoicWallet } from "@connect2ic/core/providers/stoic-wallet";
 import { Connect2ICProvider } from "@connect2ic/vue";
+import "@connect2ic/core/style.css";
 
 import "@connect2ic/core/style.css";
 
@@ -63,26 +68,29 @@ export default {
       host: window.location.origin,
       providers: [
         new AstroX({ dev: true }),
-        new InternetIdentity({ dev: true, providerUrl: "https://identity.ic0.app" }),
-        new NFID()
+        new InternetIdentity({ providerUrl: "https://identity.ic0.app" }),
+        new NFID({ providerUrl: "https://nfid.one" }),
+        new InfinityWallet(),
+        new PlugWallet(),
+        new StoicWallet({ providerUrl: "https://www.stoicwallet.com" })
       ],
       globalProviderConfig: {
         // Determines whether root key is fetched
         // Should be enabled while developing locally & disabled in production
         dev: true,
         // The host
-        host: "http://127.0.0.1:8000",
+        host: window.location.origin,
         // Certain providers require specifying an app name
         appName: "rust_simplifire",
         // Certain providers require specifying which canisters are whitelisted
         // Array<string>
-        whitelist: ["rrkah-fqaaa-aaaaa-aaaaq-cai"],
+        whitelist: [],
         // Certain providers allow you to specify a canisterId for the Ledger canister
         // For example when running it locally
-        ledgerCanisterId: "rrkah-fqaaa-aaaaa-aaaaq-cai",
+        //ledgerCanisterId: "",
         // Certain providers allow you to specify a host for the Ledger canister
         // For example when running it locally
-        ledgerHost: "http://127.0.0.1:8000"
+        //ledgerHost: ""
       },
     });
     this.$store.state.connectClient = client;
@@ -98,6 +106,7 @@ export default {
     });
       return {
         client: client,
+        navBarComponentKey: 0
       };
     },
   methods: {

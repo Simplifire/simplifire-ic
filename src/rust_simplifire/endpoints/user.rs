@@ -4,16 +4,17 @@ use ic_cdk_macros::*;
 use crate::{RUNTIME_STATE, User, RuntimeState};
 
 #[update]
-fn add_user(principal_id: u32, first_name: String, last_name: String, email: String) -> u32 {
-    RUNTIME_STATE.with(|state| add_user_impl(principal_id, first_name, last_name, email, &mut state.borrow_mut()))
+fn add_user(principal_id: String, provider_id: String, first_name: String, last_name: String, email: String) -> u32 {
+    RUNTIME_STATE.with(|state| add_user_impl(principal_id, provider_id, first_name, last_name, email, &mut state.borrow_mut()))
 }
-fn add_user_impl(principal_id: u32, first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
+fn add_user_impl(principal_id: String, provider_id: String, first_name: String, last_name: String, email: String, runtime_state: &mut RuntimeState) -> u32 {
     let id = runtime_state.env.random_u32();
     let now = runtime_state.env.now();
 
     runtime_state.data.users.push(User {
         id,
         principal_id,
+        provider_id,
         first_name,
         last_name,
         email,

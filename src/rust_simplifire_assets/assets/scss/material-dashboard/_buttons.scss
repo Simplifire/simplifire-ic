@@ -188,3 +188,23 @@
     }
   }
 }
+
+.connect-button {
+  @extend .btn;
+  @extend .bg-gradient-primary;
+  @extend .mb-0;
+  @extend .m-3;
+}
+.dialog-container {
+  margin: 8px;
+}
+.button-styles {
+  height: 90px;
+  width: 130px;
+  margin: 3px;
+  background-color: white;
+
+  img.img-styles {
+    height: 35px;
+  }
+}

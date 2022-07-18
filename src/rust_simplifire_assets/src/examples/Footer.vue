@@ -11,12 +11,12 @@
             {{ new Date().getFullYear() }}, made with
             <i class="fa fa-heart"></i> by
             <a
-              href="https://www.creative-tim.com"
+              href="https://simplifire.world"
               class="font-weight-bold"
               target="_blank"
-              >Creative Tim</a
+              >Simplifire Team</a
             >
-            for a better web.
+            .
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@
 
                         <div class="col-lg-8 d-flex align-items-center justify-content-end">
                             <label
-                                >Author: <span class="badge rounded-pill bg-dark">{{ author?.email }}</span></label
+                                >Author: <span class="badge rounded-pill bg-dark">{{ display(author) }}</span></label
                             >
 
                             <button
@@ -27,7 +27,7 @@
 
                             <label v-else
                                 >Shared with:
-                                <span class="badge rounded-pill bg-dark">{{ sharedWith?.email }}</span></label
+                                <span class="badge rounded-pill bg-dark">{{ display(sharedWith) }}</span></label
                             >
 
                             <label v-if="sharedWith && !userIsCurrentEditor && !documentAgreed">
@@ -334,6 +334,15 @@ export default {
             await DocumentService.signDocument(this.editedDocument.id, this.$store.state.user_id, signedAs, signedOnBehalfOf);
             this.$router.push({ name: "Documents" });
         },
+        display(user) {
+            if (user?.first_name && user?.last_name && user?.email) {
+                return user.first_name + ' ' + user.last_name + ' ' + user.email;
+            } else if (user?.principal_id && user?.provider_id) {
+                return user.principal_id.substring(0, 8) + '... | ' + user.provider_id;
+            } else {
+                return "";
+            }
+        }
     },
 };
 </script>

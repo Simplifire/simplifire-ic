@@ -18,7 +18,7 @@
           class="pe-md-3 d-flex align-items-center"
           :class="this.$store.state.isRTL ? 'me-md-auto' : 'ms-md-auto'"
         >
-          <vmd-input label="Search here" />
+          <!--<vmd-input label="Search here" />-->
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
@@ -41,8 +41,9 @@
               class="px-0 nav-link font-weight-bold lh-1"
               :class="textWhite ? textWhite : 'text-body'"
             >
-              <span class="badge rounded-pill bg-info">{{ this.$store.state.email }}</span>
+              <span class="badge rounded-pill bg-info">{{ this.user }}</span>
             </router-link>
+            
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
@@ -109,11 +110,15 @@ export default {
   data() {
     return {
       showMenu: false,
+      user: "",
     };
   },
   props: ["minNav", "textWhite"],
   created() {
     this.minNav;
+  },
+  async mounted() {
+    this.user = await this.$store.getters.thisUserDisplay;
   },
   methods: {
     ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
@@ -124,12 +129,12 @@ export default {
   },
   components: {
     Breadcrumbs,
-    VmdInput,
+    VmdInput
   },
   computed: {
     currentRouteName() {
       return this.$route.name;
-    },
-  },
+    }
+  }
 };
 </script>

@@ -8,6 +8,7 @@
 
       <sidenav-item :to="{ name: 'Documents' }" miniIcon="P" text="Documents" />
       <sidenav-item :to="{ name: 'Users' }" miniIcon="U" text="Users" />
+      <sidenav-item :to="{ name: 'Profile' }" miniIcon="P" text="Profile" />
 
       <li v-if="isDebug" class="nav-item" :class="getRoute() === 'dashboards' ? 'active' : ''">
         <sidenav-collapse

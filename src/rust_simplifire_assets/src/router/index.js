@@ -32,10 +32,13 @@ import Illustration from "../views/auth/signin/Illustration.vue";
 import ResetCover from "../views/auth/reset/Cover.vue";
 import SignupCover from "../views/auth/signup/Cover.vue";
 
-import Users from "../views/users/Users.vue"
-import Documents from "../views/documents/Documents.vue"
-import NewDocument from "../views/documents/NewDocument.vue"
-import EditDocument from "../views/documents/EditDocument.vue"
+import Users from "../views/users/Users.vue";
+import Documents from "../views/documents/Documents.vue";
+import NewDocument from "../views/documents/NewDocument.vue";
+import EditDocument from "../views/documents/EditDocument.vue";
+import Profile from "../views/pages/profile/Profile.vue";
+
+import { useConnect } from "@connect2ic/vue";
 
 import store from "./../store";
 
@@ -69,6 +72,11 @@ const routes = [
     path: "/users",
     name: "Users",
     component: Users
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   },
   /////////
   {
@@ -237,12 +245,15 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
   let isAuthenticated = false;
 
-  if(store.state.user_id && store.state.email) {
+  if(store.state.provider_id && store.state.principal_id) {
     isAuthenticated = true;
-  } else {
-    // todo: read email from localstorage and get the id again?
   }
 
+  if (isAuthenticated && to.name === 'Signin Basic') {
+    isAuthenticated = false;
+    store.state.connectClient.disconnect();
+    return;
+  }
   
   if (
     !isAuthenticated &&
@@ -250,6 +261,7 @@ router.beforeEach(async (to, from) => {
   ) {
     return { name: 'Signin Basic' }
   }
+
 })
 
 export default router;

@@ -18,28 +18,40 @@
                    <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
-                    Email
+                    Principal
                   </th>
-                  <!--
+                  
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Provider ID
+                  </th>
+                  
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
                     First name
                   </th>
-
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                   >
                     Last name
                   </th>
-                  -->
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Email
+                  </th>
+                  
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="u in users" :key="u.id">
-                <td class="text-sm font-weight-normal">{{ u.email }}</td>
-                  <!--<td class="text-sm font-weight-normal"></td>
-                  <td class="text-sm font-weight-normal"></td>-->
+                  <td class="text-sm font-weight-normal"><span class="badge rounded-pill bg-dark">{{ u.principal_id }}</span></td>
+                  <td class="text-sm font-weight-normal">{{ u.provider_id }}</td>
+                  <td class="text-sm font-weight-normal">{{ u.first_name }}</td>
+                  <td class="text-sm font-weight-normal">{{ u.last_name }}</td>
+                  <td class="text-sm font-weight-normal">{{ u.email }}</td>
                 </tr>
               </tbody>
             </table>
@@ -52,9 +64,9 @@
 
 <script>
 import { rust_simplifire } from "../../../../declarations/rust_simplifire";
-
 import { DataTable } from "simple-datatables";
 import VmdButton from "components/VmdButton.vue";
+
 export default {
   name: "Users",
   components: {

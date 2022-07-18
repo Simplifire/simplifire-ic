@@ -14,7 +14,8 @@ type Document =
 type User =
     record {
         id: nat32;
-        principal_id: nat32;
+        principal_id: text;
+        provider_id: text;
         first_name: text;
         last_name: text;
         email: text;
@@ -61,10 +62,10 @@ service: {
     get_doc: (id: nat32) -> (opt Document) query;
     change_current_doc_editor: (id: nat32, current_editor_id: nat32) -> (bool);
 
-    add_user: (principal_id: nat32, first_name: text, last_name: text, email: text) -> (nat32); 
+    add_user: (principal_id: text, provider_id: text, first_name: text, last_name: text, email: text) -> (nat32); 
     get_users: (opt bool) -> (vec User) query;
     get_user: (id: nat32) -> ();
-    update_user: (id: nat32, principal_id: nat32, first_name: text, last_name: text, email: text) -> (); 
+    update_user: (id: nat32, first_name: text, last_name: text, email: text) -> (); 
 
     add_user_document: (document_id: nat32, user_id: nat32, role: text) -> (id: nat32);
     get_user_documents: (opt bool) -> (vec UserDocument) query;

@@ -36,6 +36,7 @@ import Users from "../views/users/Users.vue";
 import Documents from "../views/documents/Documents.vue";
 import NewDocument from "../views/documents/NewDocument.vue";
 import EditDocument from "../views/documents/EditDocument.vue";
+import DocumentClippets from "../views/documents/DocumentClippets.vue";
 import Profile from "../views/pages/profile/Profile.vue";
 
 import { useConnect } from "@connect2ic/vue";
@@ -67,6 +68,11 @@ const routes = [
     path: "/documents/edit/:id",
     name: "Edit Document",
     component: EditDocument
+  },
+  {
+    path: "/documents/clippets/:id",
+    name: "Document Clippets",
+    component: DocumentClippets
   },
   {
     path: "/users",

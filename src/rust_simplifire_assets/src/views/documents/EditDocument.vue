@@ -4,12 +4,12 @@
             <div class="mx-auto col-lg-12 col-12">
                 <div class="mt-4 card card-body">
                     <div class="row">
-                        <div class="col-lg-4 col-6 mt-2">
+                        <div class="col-lg-2 col-6 mt-2">
                             <h6 class="mb-0">Edit Document</h6>
                             <p class="mb-0 text-sm">Edit existing document</p>
                         </div>
 
-                        <div class="col-lg-8 d-flex align-items-center justify-content-end">
+                        <div class="col-lg-10 d-flex align-items-center justify-content-end">
                             <label
                                 >Author: <span class="badge rounded-pill bg-dark">{{ display(author) }}</span></label
                             >
@@ -80,7 +80,10 @@
                     <div class="row">
                         
                     </div>
-                    <strong>{{ editedDocument.name }}</strong><small class="text-muted">version: {{ latestVersion.version_number }}</small>
+                    <strong>{{ editedDocument.name }}</strong>
+                        <router-link :to="{ name: 'Document Clippets', params: {id: $route.params.id} }">
+                            <small class="text-muted">version: {{ latestVersion.version_number }}</small>
+                        </router-link>
 
                     <label class="mt-4">Document Content</label>
 
